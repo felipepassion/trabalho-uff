@@ -1,5 +1,6 @@
-# Trabalho UFF - Desenvolvimento Web
+# Trabalho UFF - Desenvolvimento Web 2022.2
 ## Aluno: Felipe Paixão da Silva
+## Professor: Leonardo Cruz
 
 ![image](https://user-images.githubusercontent.com/29386600/194786807-e6989f45-bf22-4987-92d2-74e70075f3a9.png)
 
