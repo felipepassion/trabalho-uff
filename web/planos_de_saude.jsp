@@ -6,18 +6,45 @@
 
 <div class="page">
     <jsp:include page="menu.jsp" />
-    <div class="col-sm-6 offset-3 mt-5">
+    <div class="col-sm-6 offset-1 mt-5">
 
-        <h3>Dados do Plano de Saúde</h3>
-        <form action="enviarDados" method="POST">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" name="nome" class="form-control">
-            </div>
-            <div>
-                <a href="inicio.jsp"><input type="buton" value="Salvar" class="btn btn-primary"></a>
-            </div>
-        </form>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+            <span class="oi oi-book me-2" aria-hidden="true"></span>
+            <span class="text-nowrap">
+                <a href="novo_plano_de_saude.jsp">Planos de saúde</a>
+            </span>
+        </div>
+        </article>
+        
+        <br/><br/><br/>
+        
+        <h3>Lista de Planos de Saúde</h3>
+
+        <table style="display:block" class="table">
+           <thead>
+               <tr>
+                   <th>Descrição</th>
+               </tr>
+           </thead><!--!-->
+           <tbody>
+               <tr>
+                   <td>UNIMED</td>
+               </tr>
+               <tr>
+                   <td>AMIL</td>
+               </tr>
+               <tr>
+                   <td>SulAmérica</td>
+               </tr>
+               <tr>
+                   <td>Particular</td>
+               </tr>
+           </tbody>
+       </table>
+
+        <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </div>
-    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    
 </div>

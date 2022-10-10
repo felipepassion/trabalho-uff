@@ -6,30 +6,45 @@
 
 <div class="page">
     <jsp:include page="menu.jsp" />
-    <div class="col-sm-6 offset-3 mt-5">
+    <div class="col-sm-6 offset-1 mt-5">
 
-        <h3>Dados do Paciente</h3>
-        <form action="enviarDados" method="POST">
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" name="nome" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="endereco" class="form-label">CPF</label>
-                <input type="text" name="cpf" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="plano_de_saude" class="form-label">Tipo do Plano de Saúde</label>
-                <select  name="plano_de_saude" class="form-control">
-                    <option>Amil</option>
-                    <option>Golden Cross</option>
-                    <option>Bradesco Saúde</option>
-                </select>
-            </div>
-            <div>
-                <a href="inicio.jsp"><input type="buton" value="Salvar" class="btn btn-primary"></a>
-            </div>
-        </form>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+            <span class="oi oi-person me-2" aria-hidden="true"></span>
+            <span class="text-nowrap">
+                <a href="novo_paciente.jsp">Novo Paciente</a>
+            </span>
+        </div>
+        </article>
+        
+        <br/><br/><br/>
+        
+        <h3>Lista de Pacientes</h3>
+
+        <table style="display:block" class="table">
+           <thead>
+               <tr>
+                   <th>Nome</th>
+                   <th>CPF</th>
+                   <th>Plano de Saúde</th>
+               </tr>
+           </thead><!--!-->
+           <tbody>
+               <tr>
+                   <td>Maria</td>
+                   <td>937.397.160-37</td>
+                   <td>Amil</td>
+               </tr>
+               <tr>
+                   <td>Felipe Paixão da Silva</td>
+                   <td>222.222.222-02</td>
+                   <td>Golden Cross</td>
+               </tr>
+           </tbody>
+       </table>
+
+        <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </div>
-    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    
 </div>
