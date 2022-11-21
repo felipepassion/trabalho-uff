@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/controller/login.java</file>
+            <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/controller/LoginController.java</file>
+            <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/models/Usuario.java</file>
+            <file>file:/C:/Users/felip/source/repos/trabalho-uff/web/views/formUsuario.jsp</file>
+            <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/NewServlet.java</file>
             <file>file:/C:/Users/felip/source/repos/trabalho-uff/src/java/DAO/UsuarioDAO.java</file>
         </group>
     </open-files>
