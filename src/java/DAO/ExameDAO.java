@@ -1,3 +1,4 @@
+package DAO;
 
 import DAO.Conexao;
 import java.sql.PreparedStatement;
@@ -13,9 +14,9 @@ public class ExameDAO {
         try {
             PreparedStatement sql = conexao.getConexao()
                     .prepareStatement("INSERT INTO exame (idtipoexame, idconsulta)"
-                            + " VALUES (?,?,?)");
+                            + " VALUES (?,?)");
             sql.setInt(1, exame.getIdTipoExame());
-            sql.setInt(3, exame.getIdConsulta());
+            sql.setInt(2, exame.getIdConsulta());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -29,7 +30,7 @@ public class ExameDAO {
         Conexao conexao = new Conexao();
         try {
             Exame exame = new Exame();
-            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM exame WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM exames WHERE ID = ? ");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
             if (resultado != null) {
@@ -52,10 +53,10 @@ public class ExameDAO {
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao()
-                    .prepareStatement("UPDATE exame SET idtipoexame = ?, idconsulta = ? WHERE ID = ? ");
+                    .prepareStatement("UPDATE exames SET idtipoexame = ?, idconsulta = ? WHERE ID = ? ");
             sql.setInt(1, Exame.getIdTipoExame());
             sql.setInt(2, Exame.getIdConsulta());
-            sql.setInt(4, Exame.getId());
+            sql.setInt(3, Exame.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -68,7 +69,7 @@ public class ExameDAO {
     public void Excluir(Exame Exame) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM exame WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM exames WHERE ID = ? ");
             sql.setInt(1, Exame.getId());
             sql.executeUpdate();
 
@@ -83,7 +84,7 @@ public class ExameDAO {
         ArrayList<Exame> meusExames = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM exame order by idtipoexame";
+            String selectSQL = "SELECT * FROM exames order by IDTIPOEXAME";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();

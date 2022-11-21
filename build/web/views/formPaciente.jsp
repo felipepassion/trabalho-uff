@@ -59,7 +59,11 @@
                     <%
                     ArrayList<TipoPlano> listaDePlanos = (ArrayList<TipoPlano>) request.getAttribute("listaDePlanos");
                         for (TipoPlano tipoPlano : listaDePlanos) {
-                            out.println("<option value= '"+tipoPlano.getId()+"'>");
+                            String str = "";
+                            if (paciente != null && paciente.getIdTipoPlano() == tipoPlano.getId()){
+                                str = "selected";
+                            }
+                            out.println("<option "+str+" value= '"+tipoPlano.getId()+"'>");
                                 out.println(tipoPlano.getDescricao());
                                 out.println("</option>");
                             }

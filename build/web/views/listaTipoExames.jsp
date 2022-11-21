@@ -1,11 +1,11 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.Medico"%>
+<%@page import="models.TipoExame"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <head>
-    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/site.css" rel="stylesheet" type="text/css"/>
-    <link href="bootstrap/ionic.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/site.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap/ionic.bootstrap.css" rel="stylesheet" type="text/css" />
 </head>
 <div class="page">
     <jsp:include page="menu.jsp" />
@@ -17,7 +17,7 @@
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
-                <h2>Lista de Médicos</h2>
+                <h2>Lista de Exames de Saúde</h2>
 
                 <%  String msgOperacaoRealizada = (String) request.getAttribute("msgOperacaoRealizada");
         if ((msgOperacaoRealizada != null) && (!msgOperacaoRealizada.isEmpty())) {%>
@@ -29,28 +29,27 @@
 
                 <% }%>
 
-                <a href="medico?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                <a href="tipoExame?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Açoes</th>
+                                <th scope="col">Exame</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Medico> listaMedicos = (ArrayList<Medico>) request.getAttribute("listaMedicos");
+                                ArrayList<TipoExame> listaPacientes = (ArrayList<TipoExame>) request.getAttribute("listaTipoExames");
 
-                                for (Medico medico : listaMedicos) {
+                                for (TipoExame paciente : listaPacientes) {
                                     out.println("<tr>");
-                                    out.println("<th>" + medico.getId() + "</th>");
-                                    out.println("<td>" + medico.getNome() + "</td>");
-                                    out.println("<td>" + medico.getCpf() + "</td>");%>
-                        <td><a href="medico?acao=Alterar&id=<%=medico.getId()%>" class="btn btn-warning">Alterar</a>
-                            <a href="medico?acao=Excluir&id=<%=medico.getId()%>" class="btn btn-danger">Excluir</a></td>
+                                    out.println("<th>" + paciente.getId() + "</th>");
+                                    out.println("<td>" + paciente.getDescricao() + "</td>");%>
+                            <td><a href="tipoExame?acao=Alterar&id=<%=paciente.getId()%>"
+                                    class="btn btn-warning">Alterar</a>
+                                <a href="tipoExame?acao=Excluir&id=<%=paciente.getId()%>"
+                                    class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");
                                 }
                             %>

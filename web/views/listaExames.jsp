@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.Usuario"%>
+<%@page import="models.Exame"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <head>
@@ -17,7 +17,7 @@
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
-                <h2>Lista de Usuários</h2>
+                <h2>Lista de Exames</h2>
 
                 <%  String msgOperacaoRealizada = (String) request.getAttribute("msgOperacaoRealizada");
         if ((msgOperacaoRealizada != null) && (!msgOperacaoRealizada.isEmpty())) {%>
@@ -29,30 +29,29 @@
 
                 <% }%>
 
-                <a href="usuario?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                <a href="exame?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Endereço</th>
+                                <th scope="col">Tipo do Exame</th>
+                                <th scope="col">Consulta</th>
+                                <th scope="col">Exame Realizado?</th>
                                 <th scope="col">Açoes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
+                                ArrayList<Exame> listaExames = (ArrayList<Exame>) request.getAttribute("listaExames");
 
-                                for (Usuario usuario : listaUsuarios) {
+                                for (Exame exame : listaExames) {
                                     out.println("<tr>");
-                                    out.println("<th>" + usuario.getId() + "</th>");
-                                    out.println("<td>" + usuario.getNome() + "</td>");
-                                    out.println("<td>" + usuario.getCpf() + "</td>");
-                                    out.println("<td>" + usuario.getEndereco() + "</td>");%>
-                        <td><a href="usuario?acao=Alterar&id=<%=usuario.getId()%>" class="btn btn-warning">Alterar</a>
-                            <a href="usuario?acao=Excluir&id=<%=usuario.getId()%>" class="btn btn-danger">Excluir</a></td>
+                                    out.println("<th>" + exame.getId() + "</th>");
+                                    out.println("<td>" + exame.getExame() + "</td>");
+                                    out.println("<td>" + exame.getConsulta() + "</td>");%>
+                        <td><a href="exame?acao=Alterar&id=<%=exame.getId()%>" class="btn btn-warning">Alterar</a>
+                            <a href="exame?acao=Excluir&id=<%=exame.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");
                                 }
                             %>

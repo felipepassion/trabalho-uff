@@ -1,5 +1,5 @@
 <div class="page">
-    
+
     <div class="sidebar">
         <div class="top-row ps-3 navbar navbar-dark">
             <div class="container-fluid">
@@ -22,23 +22,45 @@
                         <span class="oi oi-person" aria-hidden="true"></span> Pacientes
                     </a>
                 </div>
+
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
-                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Mï¿½dicos
+                        <span class="oi oi-person" aria-hidden="true"></span>  Médicos
                     </a>
                 </div>
+
                 <div class="nav-item px-3">
                     <a class="nav-link" href="especialidade" Match="NavLinkMatch.All">
-                        <span class="oi oi-graph" aria-hidden="true"></span> Especialidades
+                        <span class="oi oi-graph" aria-hidden="true"></span> Especialidades Médicas
                     </a>
                 </div>
+
                 <div class="nav-item px-3">
-                    <a class="nav-link" href="tipoPlano" Match="NavLinkMatch.All">
-                        <span class="oi oi-book" aria-hidden="true"></span> Planos de Saï¿½de
+                    <a class="nav-link" href="exame" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Exame
+                    </a>
+                </div>                
+
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Consulta
+                    </a>
+                </div>  
+                
+                <div class="nav-item px-3">
+                    <a class="nav-link active" href="tipoPlano" Match="NavLinkMatch.All">
+                        <span class="oi oi-book" aria-hidden="true"></span> Planos de Saúde
                     </a>
                 </div>
+
                 <div class="nav-item px-3">
-                    <a class="nav-link" href="usuarios" Match="NavLinkMatch.All">
+                    <a class="nav-link" href="tipoExame" Match="NavLinkMatch.All">
+                        <span class="oi oi-book" aria-hidden="true"></span>  Tipos de Exame
+                    </a>
+                </div>
+
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="usuario" Match="NavLinkMatch.All">
                         <span class="oi oi-people" aria-hidden="true"></span> Criar Administradores
                     </a>
                 </div>

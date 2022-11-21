@@ -69,7 +69,11 @@
                     <%
                     ArrayList<Especialidade> listaDeEspecialidade = (ArrayList<Especialidade>) request.getAttribute("listaDeEspecialidade");
                         for (Especialidade especialidade : listaDeEspecialidade) {
-                            out.println("<option value= '"+especialidade.getId()+"'>");
+                            String str = "";
+                            if (medico != null && medico.getIdEspecialidade() == especialidade.getId()){
+                                str = "selected";
+                            }
+                            out.println("<option "+str+" value= '"+especialidade.getId()+"'>");
                                 out.println(especialidade.getDescricao());
                                 out.println("</option>");
                             }

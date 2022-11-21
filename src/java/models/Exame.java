@@ -5,6 +5,9 @@
  */
 package models;
 
+import DAO.ConsultaDAO;
+import DAO.TipoExameDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,5 +51,26 @@ public class Exame {
 
     public void setIdConsulta(int idconsulta) {
         this.idconsulta = idconsulta;
+    }
+
+    public String getConsulta(){
+        ConsultaDAO consultaDAO = new ConsultaDAO();
+        ArrayList<Consulta> consultas = consultaDAO.ListaDeConsultas();
+            for(Consulta consulta : consultas){
+            if(consulta.getId() == this.getIdConsulta()){
+                return consulta.getDescricao();
+            }
+        }
+        return null;
+    }
+    public String getExame(){
+        TipoExameDAO exameDAO = new TipoExameDAO();
+        ArrayList<TipoExame> exames = exameDAO.ListaDeTipoExames();
+            for(TipoExame exame : exames){
+            if(exame.getId() == this.getIdTipoExame()){
+                return exame.getDescricao();
+            }
+        }
+        return null;
     }
 }

@@ -50,7 +50,7 @@ public class EspecialidadeDAO {
         try {
             PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE especialidade SET descricao = ?  WHERE ID = ? ");
             sql.setString(1, Especialidade.getDescricao());
-            sql.setInt(5, Especialidade.getId());
+            sql.setInt(2, Especialidade.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {

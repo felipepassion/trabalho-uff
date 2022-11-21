@@ -17,7 +17,7 @@
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
-                <h2>Lista de Usuários</h2>
+                <h2>Lista de Consultas</h2>
 
                 <%  String msgOperacaoRealizada = (String) request.getAttribute("msgOperacaoRealizada");
         if ((msgOperacaoRealizada != null) && (!msgOperacaoRealizada.isEmpty())) {%>

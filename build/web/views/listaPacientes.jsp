@@ -17,7 +17,7 @@
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
-                <h2>Lista de Usuários</h2>
+                <h2>Lista de Pacientes</h2>
 
                 <%  String msgOperacaoRealizada = (String) request.getAttribute("msgOperacaoRealizada");
         if ((msgOperacaoRealizada != null) && (!msgOperacaoRealizada.isEmpty())) {%>
@@ -37,6 +37,7 @@
                                 <th scope="col">Id</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">CPF</th>
+                                <th scope="col">Plano de Saúde</th>
                                 <th scope="col">Açoes</th>
                             </tr>
                         </thead>
@@ -48,7 +49,8 @@
                                     out.println("<tr>");
                                     out.println("<th>" + paciente.getId() + "</th>");
                                     out.println("<td>" + paciente.getNome() + "</td>");
-                                    out.println("<td>" + paciente.getCpf() + "</td>");%>
+                                    out.println("<td>" + paciente.getCpf() + "</td>");
+                                    out.println("<td>" + paciente.getTipoPlano() + "</td>");%>
                         <td><a href="paciente?acao=Alterar&id=<%=paciente.getId()%>" class="btn btn-warning">Alterar</a>
                             <a href="paciente?acao=Excluir&id=<%=paciente.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");

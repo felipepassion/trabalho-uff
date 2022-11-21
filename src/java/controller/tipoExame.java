@@ -7,12 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DAO.TipoPlanoDAO;
-import models.TipoPlano;
+import DAO.TipoExameDAO;
+import models.TipoExame;
 import javax.servlet.RequestDispatcher;
 
-@WebServlet(name = "tipoPlano", urlPatterns = { "/tipoPlano" })
-public class tipoPlano extends HttpServlet {
+@WebServlet(name = "tipoExame", urlPatterns = { "/tipoExame" })
+public class tipoExame extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,42 +23,40 @@ public class tipoPlano extends HttpServlet {
             acao = "Listar";
         }
 
-        TipoPlano tipoPlano = new TipoPlano();
-        TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
+        TipoExame tipoExame = new TipoExame();
+        TipoExameDAO tipoExameDAO = new TipoExameDAO();
         RequestDispatcher rd;
-        ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
-        request.setAttribute("listaTipoPlanos", listaTipoPlanos);
         switch (acao) {
             case "Listar":
                 try {
                     request.setAttribute("msgOperacaoRealizada", "");
-
-                    rd = request.getRequestDispatcher("/views/listaTipoPlanos.jsp");
+                    ArrayList<TipoExame> listaTipoExames = tipoExameDAO.ListaDeTipoExames();
+                    request.setAttribute("listaTipoExames", listaTipoExames);
+                    rd = request.getRequestDispatcher("/views/listaTipoExames.jsp");
                     rd.forward(request, response);
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha na query listar tipoPlanos (TipoPlano) - " + ex.getMessage());
+                    throw new RuntimeException("Falha na query listar tipoExames (TipoExame) - " + ex.getMessage());
                 }
                 break;
             case "Alterar":
             case "Excluir":
                 try {
                     int id = Integer.parseInt(request.getParameter("id"));
-                    tipoPlano = tipoPlanoDAO.getTipoPlano(id);
-                    tipoPlano.setId(id);
+                    tipoExame = tipoExameDAO.getTipoExame(id);
+                    tipoExame.setId(id);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de tipoPlano");
+                    throw new RuntimeException("Falha em uma query para cadastro de tipoExame");
                 }
                 break;
 
         }
-
-        request.setAttribute("tipoPlano", tipoPlano);
+        request.setAttribute("tipoExame", tipoExame);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
 
-        rd = request.getRequestDispatcher("/views/formTipoPlano.jsp");
+        rd = request.getRequestDispatcher("/views/formTipoExame.jsp");
         rd.forward(request, response);
     }
 
@@ -75,7 +73,7 @@ public class tipoPlano extends HttpServlet {
 
         if (descricao_user.isEmpty()) {
 
-            TipoPlano tipoPlano = new TipoPlano();
+            TipoExame tipoExame = new TipoExame();
             switch (btEnviar) {
                 case "Incluir":
                     request.setAttribute("acao", "Incluir");
@@ -83,54 +81,54 @@ public class tipoPlano extends HttpServlet {
                 case "Alterar":
                 case "Excluir":
                     try {
-                        TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
-                        tipoPlano = tipoPlanoDAO.getTipoPlano(id);
+                        TipoExameDAO tipoExameDAO = new TipoExameDAO();
+                        tipoExame = tipoExameDAO.getTipoExame(id);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                         throw new RuntimeException(
-                                "Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
+                                "Falha em uma query para cadastro de tipoExame - " + ex.getMessage());
                     }
                     break;
             }
 
             request.setAttribute("msgError", "É necessário preencher todos os campos");
-            request.setAttribute("tipoPlano", tipoPlano);
+            request.setAttribute("tipoExame", tipoExame);
 
-            rd = request.getRequestDispatcher("/views/formTipoPlano.jsp");
+            rd = request.getRequestDispatcher("/views/formTipoExame.jsp");
             rd.forward(request, response);
 
         } else {
 
-            TipoPlano tipoPlano = new TipoPlano(descricao_user);
-            tipoPlano.setId(id);
+            TipoExame tipoExame = new TipoExame(descricao_user);
+            tipoExame.setId(id);
 
-            TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
+            TipoExameDAO tipoExameDAO = new TipoExameDAO();
 
             try {
                 switch (btEnviar) {
                     case "Incluir":
-                        tipoPlanoDAO.Inserir(tipoPlano);
+                        tipoExameDAO.Inserir(tipoExame);
                         request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                         break;
                     case "Alterar":
-                        tipoPlanoDAO.Alterar(tipoPlano);
+                        tipoExameDAO.Alterar(tipoExame);
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        tipoPlanoDAO.Excluir(tipoPlano);
+                        tipoExameDAO.Excluir(tipoExame);
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }
 
-                ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
-                request.setAttribute("listaTipoPlanos", listaTipoPlanos);
+                ArrayList<TipoExame> listaTipoExames = tipoExameDAO.ListaDeTipoExames();
+                request.setAttribute("listaTipoExames", listaTipoExames);
 
-                rd = request.getRequestDispatcher("/views/listaTipoPlanos.jsp");
+                rd = request.getRequestDispatcher("/views/listaTipoExames.jsp");
                 rd.forward(request, response);
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
+                throw new RuntimeException("Falha em uma query para cadastro de tipoExame - " + ex.getMessage());
             }
         }
     }

@@ -31,7 +31,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-graph me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="especialidade">Especialidades Mï¿½dicas</a>
+                <a href="especialidade">Especialidades Médicas</a>
             </span>
         </div>
         </article>
@@ -40,7 +40,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="medico">Mï¿½dicos</a>
+                <a href="medico">Médicos</a>
             </span>
         </div>
         </article>
@@ -49,7 +49,16 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-book me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="planoDeSaude">Planos de saï¿½de</a>
+                <a href="tipoPlano">Planos de saúde</a>
+            </span>
+        </div>
+        </article>
+    
+    <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+            <span class="oi oi-book me-2" aria-hidden="true"></span>
+            <span class="text-nowrap">
+                <a href="tipoExame">Tipos de Exame</a>
             </span>
         </div>
         </article>
@@ -76,7 +85,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-people me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="usuarios">Administradores</a>
+                <a href="usuario">Administradores</a>
             </span>
         </div>
         </article>

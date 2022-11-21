@@ -45,9 +45,6 @@ public class medico extends HttpServlet {
             case "Alterar":
             case "Excluir":
                 try {
-                    EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
-                    ArrayList<Especialidade> listaDeEspecialidade = especialidadeDAO.ListaDeEspecialidades();
-                    request.setAttribute("listaDeEspecialidade", listaDeEspecialidade);
                     int id = Integer.parseInt(request.getParameter("id"));
                     medico = medicoDAO.getMedico(id);
                     medico.setId(id);
@@ -59,6 +56,11 @@ public class medico extends HttpServlet {
                 break;
 
         }
+
+        EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+        ArrayList<Especialidade> listaDeEspecialidade = especialidadeDAO.ListaDeEspecialidades();
+        request.setAttribute("listaDeEspecialidade", listaDeEspecialidade);
+
         request.setAttribute("medico", medico);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
@@ -84,7 +86,7 @@ public class medico extends HttpServlet {
         RequestDispatcher rd;
 
         if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty() || senha_user.isEmpty()
-                || id_especialidade.isEmpty() || crm.isEmpty() || crm_estado.isEmpty() ) {
+                || id_especialidade.isEmpty() || crm.isEmpty() || crm_estado.isEmpty()) {
 
             Medico medico = new Medico();
             switch (btEnviar) {
@@ -111,7 +113,8 @@ public class medico extends HttpServlet {
 
         } else {
 
-            Medico medico = new Medico(nome_user, cpf_user, senha_user, crm, crm_estado, Integer.parseInt(id_especialidade));
+            Medico medico = new Medico(nome_user, cpf_user, senha_user, crm, crm_estado,
+                    Integer.parseInt(id_especialidade));
             medico.setId(id);
 
             MedicoDAO medicoDAO = new MedicoDAO();

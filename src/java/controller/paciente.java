@@ -45,9 +45,6 @@ public class paciente extends HttpServlet {
             case "Alterar":
             case "Excluir":
                 try {
-                    TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
-                    ArrayList<TipoPlano> listaDePlanos = tipoPlanoDAO.ListaDeTipoPlanos();
-                    request.setAttribute("listaDePlanos", listaDePlanos);
                     int id = Integer.parseInt(request.getParameter("id"));
                     paciente = pacienteDAO.getPaciente(id);
                     paciente.setId(id);
@@ -59,6 +56,11 @@ public class paciente extends HttpServlet {
                 break;
 
         }
+
+        TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
+        ArrayList<TipoPlano> listaDePlanos = tipoPlanoDAO.ListaDeTipoPlanos();
+        request.setAttribute("listaDePlanos", listaDePlanos);
+
         request.setAttribute("paciente", paciente);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
