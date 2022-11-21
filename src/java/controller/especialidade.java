@@ -7,14 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DAO.PacienteDAO;
-import DAO.TipoPlanoDAO;
-import models.Paciente;
+import DAO.EspecialidadeDAO;
+import models.Especialidade;
 import javax.servlet.RequestDispatcher;
-import models.TipoPlano;
 
-@WebServlet(name = "paciente", urlPatterns = { "/paciente" })
-public class paciente extends HttpServlet {
+@WebServlet(name = "especialidade", urlPatterns = { "/especialidade" })
+public class especialidade extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,46 +23,45 @@ public class paciente extends HttpServlet {
             acao = "Listar";
         }
 
-        Paciente paciente = new Paciente();
-        PacienteDAO pacienteDAO = new PacienteDAO();
+        Especialidade especialidade = new Especialidade();
+        EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
         RequestDispatcher rd;
         switch (acao) {
             case "Listar":
                 try {
-                    ArrayList<Paciente> listaPacientes = pacienteDAO.ListaDePacientes();
+                    ArrayList<Especialidade> listaEspecialidades = especialidadeDAO.ListaDeEspecialidades();
                     request.setAttribute("msgOperacaoRealizada", "");
-                    request.setAttribute("listaPacientes", listaPacientes);
-                    rd = request.getRequestDispatcher("/views/listaPacientes.jsp");
+                    request.setAttribute("listaEspecialidades", listaEspecialidades);
+                    rd = request.getRequestDispatcher("/views/listaEspecialidades.jsp");
                     rd.forward(request, response);
-
+                    return;
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha na query listar pacientes (Paciente) - " + ex.getMessage());
+                    throw new RuntimeException("Falha na query listar especialidades (Especialidade) - " + ex.getMessage());
                 }
-                break;
             case "Alterar":
             case "Excluir":
                 try {
-                    TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
-                    ArrayList<TipoPlano> listaDePlanos = tipoPlanoDAO.ListaDeTipoPlanos();
-                    request.setAttribute("listaDePlanos", listaDePlanos);
                     int id = Integer.parseInt(request.getParameter("id"));
-                    paciente = pacienteDAO.getPaciente(id);
-                    paciente.setId(id);
-
+                    especialidade = especialidadeDAO.getEspecialidade(id);
+                    especialidade.setId(id);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de paciente");
+                    throw new RuntimeException("Falha em uma query para cadastro de especialidade");
                 }
                 break;
 
         }
-        request.setAttribute("paciente", paciente);
+        request.setAttribute("especialidade", especialidade);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
 
-        rd = request.getRequestDispatcher("/views/formPaciente.jsp");
+        ArrayList<Especialidade> listaDePlanos = especialidadeDAO.ListaDeEspecialidades();
+        request.setAttribute("listaDePlanos", listaDePlanos);
+
+        rd = request.getRequestDispatcher("/views/formEspecialidade.jsp");
         rd.forward(request, response);
+
     }
 
     @Override
@@ -72,19 +69,15 @@ public class paciente extends HttpServlet {
             throws ServletException, IOException {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        String nome_user = request.getParameter("nome");
-        String cpf_user = request.getParameter("cpf");
-        String senha_user = request.getParameter("senha");
-        String id_tipo_plano = request.getParameter("idtipoplano");
+        String descricao_user = request.getParameter("descricao");
 
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;
 
-        if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty() || senha_user.isEmpty()
-                || id_tipo_plano.isEmpty()) {
+        if (descricao_user.isEmpty()) {
 
-            Paciente paciente = new Paciente();
+            Especialidade especialidade = new Especialidade();
             switch (btEnviar) {
                 case "Incluir":
                     request.setAttribute("acao", "Incluir");
@@ -92,53 +85,53 @@ public class paciente extends HttpServlet {
                 case "Alterar":
                 case "Excluir":
                     try {
-                        PacienteDAO pacienteDAO = new PacienteDAO();
-                        paciente = pacienteDAO.getPaciente(id);
+                        EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+                        especialidade = especialidadeDAO.getEspecialidade(id);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
-                        throw new RuntimeException("Falha em uma query para cadastro de paciente - " + ex.getMessage());
+                        throw new RuntimeException("Falha em uma query para cadastro de especialidade - " + ex.getMessage());
                     }
                     break;
             }
 
             request.setAttribute("msgError", "É necessário preencher todos os campos");
-            request.setAttribute("paciente", paciente);
+            request.setAttribute("especialidade", especialidade);
 
-            rd = request.getRequestDispatcher("/views/formPaciente.jsp");
+            rd = request.getRequestDispatcher("/views/formEspecialidade.jsp");
             rd.forward(request, response);
 
         } else {
 
-            Paciente paciente = new Paciente(nome_user, cpf_user, senha_user, Integer.parseInt(id_tipo_plano));
-            paciente.setId(id);
+            Especialidade especialidade = new Especialidade(descricao_user);
+            especialidade.setId(id);
 
-            PacienteDAO pacienteDAO = new PacienteDAO();
+            EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
 
             try {
                 switch (btEnviar) {
                     case "Incluir":
-                        pacienteDAO.Inserir(paciente);
+                        especialidadeDAO.Inserir(especialidade);
                         request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                         break;
                     case "Alterar":
-                        pacienteDAO.Alterar(paciente);
+                        especialidadeDAO.Alterar(especialidade);
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        pacienteDAO.Excluir(paciente);
+                        especialidadeDAO.Excluir(especialidade);
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }
 
-                ArrayList<Paciente> listaPacientes = pacienteDAO.ListaDePacientes();
-                request.setAttribute("listaPacientes", listaPacientes);
+                ArrayList<Especialidade> listaEspecialidades = especialidadeDAO.ListaDeEspecialidades();
+                request.setAttribute("listaEspecialidades", listaEspecialidades);
 
-                rd = request.getRequestDispatcher("/views/listaPacientes.jsp");
+                rd = request.getRequestDispatcher("/views/listaEspecialidades.jsp");
                 rd.forward(request, response);
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de paciente - " + ex.getMessage());
+                throw new RuntimeException("Falha em uma query para cadastro de especialidade - " + ex.getMessage());
             }
         }
     }

@@ -18,6 +18,15 @@
         </div>
         </article>
         
+    <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+            <span class="oi oi-graph me-2" aria-hidden="true"></span>
+            <span class="text-nowrap">
+                <a href="tipoPlano">Planos de Saúde</a>
+            </span>
+        </div>
+        </article>
+    
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-graph me-2" aria-hidden="true"></span>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package models;
 
 /**
  *
@@ -11,15 +11,17 @@ package model;
  */
 public class Especialidade {
     
-    private String id;
+    private int id;
     private String descricao;
     
-    public Especialidade(String id, String descricao){
-        this.id = id;
+    public Especialidade() {
+        super();
+    }
+    public Especialidade(String descricao){
         this.descricao =  descricao;
     }
     
-    public String getId(){
+    public int getId(){
         return this.id;
     }
     
@@ -27,7 +29,7 @@ public class Especialidade {
         return this.descricao;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

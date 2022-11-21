@@ -43,7 +43,7 @@ public class UsuarioDAO {
             return usuario;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get) incorreta");
+            throw new RuntimeException("Query de select (get) incorreta - " + e.getMessage());
         } finally {
             conexao.closeConexao();
         }
@@ -52,15 +52,15 @@ public class UsuarioDAO {
     public void Alterar(Usuario Usuario) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE usuarios SET nome = ?, cpf = ?, endereco = ?, senha = ?  WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE usuarios SET nome = ?, cpf = ?, senha = ?  WHERE ID = ? ");
             sql.setString(1, Usuario.getNome());
             sql.setString(2, Usuario.getCpf());
-            sql.setString(4, Usuario.getSenha());
-            sql.setInt(5, Usuario.getId());
+            sql.setString(3, Usuario.getSenha());
+            sql.setInt(4, Usuario.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar) incorreta");
+            throw new RuntimeException("Query de update (alterar) incorreta - " + e.getMessage());
         } finally {
             conexao.closeConexao();
         }
@@ -74,7 +74,7 @@ public class UsuarioDAO {
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir) incorreta");
+            throw new RuntimeException("Query de delete (excluir) incorreta - " + e.getMessage());
         } finally {
             conexao.closeConexao();
         }
@@ -98,7 +98,7 @@ public class UsuarioDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeUsuarios) incorreta");
+            throw new RuntimeException("Query de select (ListaDeUsuarios) incorreta - " + e.getMessage());
         } finally {
             conexao.closeConexao();
         }

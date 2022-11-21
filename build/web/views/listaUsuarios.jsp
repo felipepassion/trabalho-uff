@@ -49,8 +49,7 @@
                                     out.println("<tr>");
                                     out.println("<th>" + usuario.getId() + "</th>");
                                     out.println("<td>" + usuario.getNome() + "</td>");
-                                    out.println("<td>" + usuario.getCpf() + "</td>");
-                                    out.println("<td>" + usuario.getEndereco() + "</td>");%>
+                                    out.println("<td>" + usuario.getCpf() + "</td>");%>
                         <td><a href="usuario?acao=Alterar&id=<%=usuario.getId()%>" class="btn btn-warning">Alterar</a>
                             <a href="usuario?acao=Excluir&id=<%=usuario.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");

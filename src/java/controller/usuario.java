@@ -36,7 +36,7 @@ public class usuario extends HttpServlet {
 
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha na query listar usuarios (Usuario) ");
+                    throw new RuntimeException("Falha na query listar usuarios (Usuario) - " + ex.getMessage());
                 }
                 break;
             case "Alterar":
@@ -87,7 +87,7 @@ public class usuario extends HttpServlet {
                         usuario = usuarioDAO.getUsuario(id);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
-                        throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                        throw new RuntimeException("Falha em uma query para cadastro de usuario - " + ex.getMessage());
                     }
                     break;
             }
@@ -129,7 +129,7 @@ public class usuario extends HttpServlet {
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                throw new RuntimeException("Falha em uma query para cadastro de usuario - " + ex.getMessage());
             }
         }
     }

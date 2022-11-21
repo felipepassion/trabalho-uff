@@ -29,12 +29,11 @@ public class tipoPlano extends HttpServlet {
         switch (acao) {
             case "Listar":
                 try {
-                    ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
                     request.setAttribute("msgOperacaoRealizada", "");
+                    ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
                     request.setAttribute("listaTipoPlanos", listaTipoPlanos);
                     rd = request.getRequestDispatcher("/views/listaTipoPlanos.jsp");
                     rd.forward(request, response);
-
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
                     throw new RuntimeException("Falha na query listar tipoPlanos (TipoPlano) - " + ex.getMessage());
@@ -57,12 +56,8 @@ public class tipoPlano extends HttpServlet {
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
 
-        ArrayList<TipoPlano> listaDePlanos = tipoPlanoDAO.ListaDeTipoPlanos();
-        request.setAttribute("listaDePlanos", listaDePlanos);
-
         rd = request.getRequestDispatcher("/views/formTipoPlano.jsp");
         rd.forward(request, response);
-
     }
 
     @Override
@@ -90,7 +85,8 @@ public class tipoPlano extends HttpServlet {
                         tipoPlano = tipoPlanoDAO.getTipoPlano(id);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
-                        throw new RuntimeException("Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
+                        throw new RuntimeException(
+                                "Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
                     }
                     break;
             }

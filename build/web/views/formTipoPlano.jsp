@@ -1,4 +1,4 @@
-<%@page import="models.Usuario"%>
+<%@page import="models.TipoPlano"%>
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="bootstrap/site.css" rel="stylesheet" type="text/css"/>
@@ -11,19 +11,19 @@
         <jsp:include page="header.jsp" />
         <article>
             <%
-                Usuario usuario = (Usuario) request.getAttribute("usuario");
+                TipoPlano tipoPlano = (TipoPlano) request.getAttribute("tipoPlano");
                 String acao = (String) request.getAttribute("acao");
                 if(acao == null || acao == "")
                     acao = "Incluir";
                 switch (acao) {
                     case "Incluir":
-                        out.println("<h1>Incluir Usu�rio</h1>");
+                        out.println("<h1>Incluir Plano</h1>");
                         break;
                     case "Alterar":
-                        out.println("<h1>Alterar Usu�rio</h1>");
+                        out.println("<h1>Alterar Plano</h1>");
                         break;
                     case "Excluir":
-                        out.println("<h1>Excluir Usu�rio</h1>");
+                        out.println("<h1>Excluir Plano</h1>");
                         break;
                 }
 
@@ -34,23 +34,15 @@
             </div>
             <% }%>
 
-            <form action="usuario" method="POST">
-                <input type="hidden" name="id" value="<%=usuario.getId()%>" class="form-control">
+            <form action="tipoPlano" method="POST">
+                <input type="hidden" name="id" value="<%=tipoPlano.getId()%>" class="form-control">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" name="nome" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=usuario.getNome()%>" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="cpf" class="form-label" >CPF</label>
-                    <input type="text" name="cpf" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=usuario.getCpf()%>" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="senha" class="form-label" >Senha</label>
-                    <input type="text" name="senha" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=usuario.getSenha()%>" class="form-control">
+                    <label for="descricao" class="form-label">Nome</label>
+                    <input type="text" name="descricao" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=tipoPlano.getDescricao()%>" class="form-control">
                 </div>
                 <div>
                     <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">
-                    <a href="usuario?acao=Listar" class="btn btn-danger">Retornar</a>
+                    <a href="tipoPlano?acao=Listar" class="btn btn-danger">Retornar</a>
                 </div>
             </form>
         </article>

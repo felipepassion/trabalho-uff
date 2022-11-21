@@ -17,13 +17,13 @@
                     acao = "Incluir";
                 switch (acao) {
                     case "Incluir":
-                        out.println("<h1>Incluir Usuário</h1>");
+                        out.println("<h1>Incluir Usuï¿½rio</h1>");
                         break;
                     case "Alterar":
-                        out.println("<h1>Alterar Usuário</h1>");
+                        out.println("<h1>Alterar Usuï¿½rio</h1>");
                         break;
                     case "Excluir":
-                        out.println("<h1>Excluir Usuário</h1>");
+                        out.println("<h1>Excluir Usuï¿½rio</h1>");
                         break;
                 }
 
@@ -43,10 +43,6 @@
                 <div class="mb-3">
                     <label for="cpf" class="form-label" >CPF</label>
                     <input type="text" name="cpf" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=usuario.getCpf()%>" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="endereco" class="form-label" >endereço</label>
-                    <input type="text" name="endereco" <%= acao.equals("Excluir") ? "Readonly" : ""%> value="<%=usuario.getEndereco()%>" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label" >Senha</label>
