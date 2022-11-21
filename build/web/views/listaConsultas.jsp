@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.Usuario"%>
+<%@page import="models.Consulta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <head>
@@ -29,30 +29,34 @@
 
                 <% }%>
 
-                <a href="usuario?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                <a href="consulta?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Endereço</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Médico</th>
+                                <th scope="col">Paciente</th>
+                                <th scope="col">Realizada?</th>
                                 <th scope="col">Açoes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
+                                ArrayList<Consulta> listaConsultas = (ArrayList<Consulta>) request.getAttribute("listaConsultas");
 
-                                for (Usuario usuario : listaUsuarios) {
+                                for (Consulta consulta : listaConsultas) {
                                     out.println("<tr>");
-                                    out.println("<th>" + usuario.getId() + "</th>");
-                                    out.println("<td>" + usuario.getNome() + "</td>");
-                                    out.println("<td>" + usuario.getCpf() + "</td>");
-                                    out.println("<td>" + usuario.getEndereco() + "</td>");%>
-                        <td><a href="usuario?acao=Alterar&id=<%=usuario.getId()%>" class="btn btn-warning">Alterar</a>
-                            <a href="usuario?acao=Excluir&id=<%=usuario.getId()%>" class="btn btn-danger">Excluir</a></td>
+                                    out.println("<th>" + consulta.getId() + "</th>");
+                                    out.println("<td>" + consulta.getDescricao() + "</td>");
+                                    out.println("<td>" + consulta.getData() + "</td>");
+                                    out.println("<td>" + consulta.getMedico() + "</td>");
+                                    out.println("<td>" + consulta.getPaciente() + "</td>");
+                                    out.println("<td>" + consulta.getRealizada() + "</td>");%>
+                        <td><a href="consulta?acao=Alterar&id=<%=consulta.getId()%>" class="btn btn-warning">Alterar</a>
+                            <a href="consulta?acao=Excluir&id=<%=consulta.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");
                                 }
                             %>

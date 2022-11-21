@@ -52,6 +52,7 @@ public class usuario extends HttpServlet {
                 break;
 
         }
+
         request.setAttribute("usuario", usuario);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);

@@ -41,6 +41,9 @@ public class ConsultaDAO {
                     consulta.setDescricao(resultado.getString("Descricao"));
                     consulta.setData(resultado.getString("Data"));
                     consulta.setRealizada(resultado.getString("Realizada"));
+                    consulta.setIdMedico(resultado.getInt("idmedico"));
+                    consulta.setIdPaciente(resultado.getInt("idpaciente"));
+
                 }
             }
             return consulta;
@@ -99,8 +102,8 @@ public class ConsultaDAO {
                     Consulta consulta = new Consulta(resultado.getString("Data"),
                             resultado.getString("Descricao"),
                             resultado.getString("Realizada"),
-                            resultado.getInt("idMedico"),
-                            resultado.getInt("idPaciente"));
+                            resultado.getInt("idmedico"),
+                            resultado.getInt("idpaciente"));
                     consulta.setId(Integer.parseInt(resultado.getString("id")));
                     meusConsultas.add(consulta);
                 }

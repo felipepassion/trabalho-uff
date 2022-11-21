@@ -7,6 +7,9 @@ package models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import DAO.MedicoDAO;
+import DAO.PacienteDAO;
 /**
  *
  * @author felip
@@ -77,5 +80,27 @@ public class Consulta {
         
     public void setIdPaciente(int idpaciente){
         this.idpaciente = idpaciente;
+    }
+
+    public String getMedico(){
+        MedicoDAO medicoDAO = new MedicoDAO();
+        ArrayList<Medico> medicos = medicoDAO.ListaDeMedicos();
+            for(Medico medico : medicos){
+            if(medico.getId() == this.getIdMedico()){
+                return medico.getNome();
+            }
+        }
+        return null;
+    }
+
+    public String getPaciente(){
+        PacienteDAO PacienteDAO = new PacienteDAO();
+        ArrayList<Paciente> Pacientes = PacienteDAO.ListaDePacientes();
+            for(Paciente paciente : Pacientes){
+            if(paciente.getId() == this.getIdPaciente()){
+                return paciente.getNome();
+            }
+        }
+        return null;
     }
 }
