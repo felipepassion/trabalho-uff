@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author natyn
+ * @author felip
  */
 public class Exame {
     

@@ -46,7 +46,6 @@ public class login extends HttpServlet {
                 rd.forward(request, response);
                 break;
 
-                break;
             case "Logout":
 
                 break;

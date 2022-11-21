@@ -7,32 +7,35 @@ package models;
 
 /**
  *
- * @author natyn
+ * @author felip
  */
 public class TipoPlano {
-    
-    private String id;
+
+    private int id;
     private String descricao;
 
-    public TipoPlano(String id, String descricao) {
-        this.id = id;
-        this.descricao = descricao; 
+    public TipoPlano() {
+        super();
     }
-    
-    public String getId(){
+
+    public TipoPlano(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getId() {
         return this.id;
     }
-    
-    public String getDescricao(){
+
+    public String getDescricao() {
         return this.descricao;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
 }

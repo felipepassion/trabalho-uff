@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.Usuario"%>
+<%@page import="models.Paciente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <head>
@@ -29,7 +29,7 @@
 
                 <% }%>
 
-                <a href="usuario?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
+                <a href="paciente?acao=Incluir" class="mb-2 btn btn-primary">Incluir</a>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -37,22 +37,20 @@
                                 <th scope="col">Id</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">CPF</th>
-                                <th scope="col">Endereço</th>
                                 <th scope="col">Açoes</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
-                                ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>) request.getAttribute("listaUsuarios");
+                                ArrayList<Paciente> listaPacientes = (ArrayList<Paciente>) request.getAttribute("listaPacientes");
 
-                                for (Usuario usuario : listaUsuarios) {
+                                for (Paciente paciente : listaPacientes) {
                                     out.println("<tr>");
-                                    out.println("<th>" + usuario.getId() + "</th>");
-                                    out.println("<td>" + usuario.getNome() + "</td>");
-                                    out.println("<td>" + usuario.getCpf() + "</td>");
-                                    out.println("<td>" + usuario.getEndereco() + "</td>");%>
-                        <td><a href="usuario?acao=Alterar&id=<%=usuario.getId()%>" class="btn btn-warning">Alterar</a>
-                            <a href="usuario?acao=Excluir&id=<%=usuario.getId()%>" class="btn btn-danger">Excluir</a></td>
+                                    out.println("<th>" + paciente.getId() + "</th>");
+                                    out.println("<td>" + paciente.getNome() + "</td>");
+                                    out.println("<td>" + paciente.getCpf() + "</td>");%>
+                        <td><a href="paciente?acao=Alterar&id=<%=paciente.getId()%>" class="btn btn-warning">Alterar</a>
+                            <a href="paciente?acao=Excluir&id=<%=paciente.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");
                                 }
                             %>

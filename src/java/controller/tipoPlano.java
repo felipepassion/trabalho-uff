@@ -7,56 +7,60 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DAO.UsuarioDAO;
-import models.Usuario;
+import DAO.TipoPlanoDAO;
+import models.TipoPlano;
 import javax.servlet.RequestDispatcher;
 
-@WebServlet(name = "usuario", urlPatterns = {"/usuario"})
-public class usuario extends HttpServlet {
+@WebServlet(name = "tipoPlano", urlPatterns = { "/tipoPlano" })
+public class tipoPlano extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String acao = (String) request.getParameter("acao");
-        if(acao == null || acao == "")
+        if (acao == null || acao == "") {
             acao = "Listar";
-        
-        Usuario usuario = new Usuario();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        }
+
+        TipoPlano tipoPlano = new TipoPlano();
+        TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
         RequestDispatcher rd;
         switch (acao) {
             case "Listar":
                 try {
-                    ArrayList<Usuario> listaUsuarios = usuarioDAO.ListaDeUsuarios();
+                    ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
                     request.setAttribute("msgOperacaoRealizada", "");
-                    request.setAttribute("listaUsuarios", listaUsuarios);
-                    rd = request.getRequestDispatcher("/views/listaUsuarios.jsp");
+                    request.setAttribute("listaTipoPlanos", listaTipoPlanos);
+                    rd = request.getRequestDispatcher("/views/listaTipoPlanos.jsp");
                     rd.forward(request, response);
 
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha na query listar usuarios (Usuario) ");
+                    throw new RuntimeException("Falha na query listar tipoPlanos (TipoPlano) - " + ex.getMessage());
                 }
                 break;
             case "Alterar":
             case "Excluir":
                 try {
                     int id = Integer.parseInt(request.getParameter("id"));
-                    usuario = usuarioDAO.getUsuario(id);
-                    usuario.setId(id);
+                    tipoPlano = tipoPlanoDAO.getTipoPlano(id);
+                    tipoPlano.setId(id);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                    throw new RuntimeException("Falha em uma query para cadastro de tipoPlano");
                 }
                 break;
 
         }
-        request.setAttribute("usuario", usuario);
+        request.setAttribute("tipoPlano", tipoPlano);
         request.setAttribute("msgError", "");
         request.setAttribute("acao", acao);
 
-        rd = request.getRequestDispatcher("/views/formUsuario.jsp");
+        ArrayList<TipoPlano> listaDePlanos = tipoPlanoDAO.ListaDeTipoPlanos();
+        request.setAttribute("listaDePlanos", listaDePlanos);
+
+        rd = request.getRequestDispatcher("/views/formTipoPlano.jsp");
         rd.forward(request, response);
 
     }
@@ -66,16 +70,15 @@ public class usuario extends HttpServlet {
             throws ServletException, IOException {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        String nome_user = request.getParameter("nome");
-        String cpf_user = request.getParameter("cpf");
-        String senha_user = request.getParameter("senha");
+        String descricao_user = request.getParameter("descricao");
+
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;
 
-        if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty()) {
+        if (descricao_user.isEmpty()) {
 
-            Usuario usuario = new Usuario();
+            TipoPlano tipoPlano = new TipoPlano();
             switch (btEnviar) {
                 case "Incluir":
                     request.setAttribute("acao", "Incluir");
@@ -83,53 +86,53 @@ public class usuario extends HttpServlet {
                 case "Alterar":
                 case "Excluir":
                     try {
-                        UsuarioDAO usuarioDAO = new UsuarioDAO();
-                        usuario = usuarioDAO.getUsuario(id);
+                        TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
+                        tipoPlano = tipoPlanoDAO.getTipoPlano(id);
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
-                        throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                        throw new RuntimeException("Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
                     }
                     break;
             }
 
             request.setAttribute("msgError", "É necessário preencher todos os campos");
-            request.setAttribute("usuario", usuario);
+            request.setAttribute("tipoPlano", tipoPlano);
 
-            rd = request.getRequestDispatcher("/views/formUsuario.jsp");
+            rd = request.getRequestDispatcher("/views/formTipoPlano.jsp");
             rd.forward(request, response);
 
         } else {
 
-            Usuario usuario = new Usuario(nome_user, cpf_user, senha_user);
-            usuario.setId(id);
+            TipoPlano tipoPlano = new TipoPlano(descricao_user);
+            tipoPlano.setId(id);
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            TipoPlanoDAO tipoPlanoDAO = new TipoPlanoDAO();
 
             try {
                 switch (btEnviar) {
                     case "Incluir":
-                        usuarioDAO.Inserir(usuario);
+                        tipoPlanoDAO.Inserir(tipoPlano);
                         request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                         break;
                     case "Alterar":
-                        usuarioDAO.Alterar(usuario);
+                        tipoPlanoDAO.Alterar(tipoPlano);
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        usuarioDAO.Excluir(usuario);
+                        tipoPlanoDAO.Excluir(tipoPlano);
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }
 
-                ArrayList<Usuario> listaUsuarios = usuarioDAO.ListaDeUsuarios();
-                request.setAttribute("listaUsuarios", listaUsuarios);
+                ArrayList<TipoPlano> listaTipoPlanos = tipoPlanoDAO.ListaDeTipoPlanos();
+                request.setAttribute("listaTipoPlanos", listaTipoPlanos);
 
-                rd = request.getRequestDispatcher("/views/listaUsuarios.jsp");
+                rd = request.getRequestDispatcher("/views/listaTipoPlanos.jsp");
                 rd.forward(request, response);
 
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                throw new RuntimeException("Falha em uma query para cadastro de tipoPlano - " + ex.getMessage());
             }
         }
     }

@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author natyn
+ * @author felip
  */
 public class Especialidade {
     

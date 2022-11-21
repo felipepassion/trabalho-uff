@@ -7,7 +7,7 @@ package models;
 
 /**
  *
- * @author natyn
+ * @author felip
  */
 public class Administrador extends Usuario {
     

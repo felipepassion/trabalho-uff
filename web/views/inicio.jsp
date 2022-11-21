@@ -13,7 +13,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-person me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="pacientes.jsp">Pacientes</a>
+                <a href="paciente">Pacientes</a>
             </span>
         </div>
         </article>
@@ -22,7 +22,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-graph me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="especialidades.jsp">Especialidades Médicas</a>
+                <a href="especialidade">Especialidades Mï¿½dicas</a>
             </span>
         </div>
         </article>
@@ -31,7 +31,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="medicos.jsp">Médicos</a>
+                <a href="medico">Mï¿½dicos</a>
             </span>
         </div>
         </article>
@@ -40,7 +40,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-book me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="planos_de_saude.jsp">Planos de saúde</a>
+                <a href="planoDeSaude">Planos de saï¿½de</a>
             </span>
         </div>
         </article>
@@ -49,7 +49,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-book me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="planos_de_saude.jsp">Marcar Exame</a>
+                <a href="exame">Marcar Exame</a>
             </span>
         </div>
         </article>
@@ -58,7 +58,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-book me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="planos_de_saude.jsp">Marcar Consulta</a>
+                <a href="consulta">Marcar Consulta</a>
             </span>
         </div>
         </article>
@@ -67,7 +67,7 @@
             <div class="alert alert-secondary mt-4">
             <span class="oi oi-people me-2" aria-hidden="true"></span>
             <span class="text-nowrap">
-                <a href="administradores.jsp">Administradores</a>
+                <a href="usuarios">Administradores</a>
             </span>
         </div>
         </article>
