@@ -12,21 +12,25 @@
     <body>
         <div class="container">
             <div class="col-sm-6 offset-3 mt-5">
-
+                <%
+                String msgError = (String) request.getAttribute("msgError");
+                if ((msgError != null) && (!msgError.isEmpty())) {%>
+                    <div class="alert alert-danger" role="alert">
+                       <%= msgError %>
+                    </div>
+            <% }%>
                 <h3>Login no Sistema</h3>
-                <form action="enviarDados" method="POST">
+                <form action="login" method="POST">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Usuário</label>
-                        <input type="text" name="usuario" class="form-control">
+                        <input required type="text" name="login" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="endereco" class="form-label">Senha</label>
-                        <input type="text" name="senha" class="form-control">
+                        <input required type="text" name="password" class="form-control">
                     </div>
                     <div>
-                        <a href="inicio.jsp">
-                            <button type="button" value="Login" class="btn btn-primary">Login</button>
-                        </a>
+                        <button type="submit" value="Login" class="btn btn-primary">Login</button>
                     </div>
                 </form>
             </div>
