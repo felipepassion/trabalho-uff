@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Usuario;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -24,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author felip
@@ -36,16 +36,19 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
 
         String acao = "Login";
-       RequestDispatcher rd ;
+        RequestDispatcher rd;
         switch (acao) {
-            case "Login":  // chama form de login
-                
+            case "Login": // chama form de login
+
+                HttpSession session = request.getSession();
+                session.invalidate();
                 rd = request.getRequestDispatcher("/views/login.jsp");
                 rd.forward(request, response);
-                
+                break;
+
                 break;
             case "Logout":
-                
+
                 break;
         }
     }
@@ -65,13 +68,12 @@ public class login extends HttpServlet {
             rd = request.getRequestDispatcher("/views/login.jsp");
             rd.forward(request, response);
 
-
         } else {
             Usuario usuarioObtido;
             Usuario usuario = new Usuario(cpf_user, senha_user);
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             try {
-               usuarioObtido = usuarioDAO.Logar(usuario);
+                usuarioObtido = usuarioDAO.Logar(usuario);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
@@ -80,17 +82,15 @@ public class login extends HttpServlet {
             if (usuarioObtido.getId() != 0) {
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", usuarioObtido);
-                
-                rd = request.getRequestDispatcher("/DashboardController");
+
+                rd = request.getRequestDispatcher("/");
                 rd.forward(request, response);
-                
-         
+
             } else {
                 request.setAttribute("msgError", "Usuário e/ou senha incorreto");
                 rd = request.getRequestDispatcher("/views/login.jsp");
                 rd.forward(request, response);
-                
-             
+
             }
         }
     }

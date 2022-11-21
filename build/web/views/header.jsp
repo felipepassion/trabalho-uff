@@ -1,4 +1,5 @@
 <div class="top-row px-4 auth">
-    <a href="#">Olá, Felipe Paixão!</a>
+    <a href="#">Olï¿½, Felipe Paixï¿½o!</a>
     <a href="#" target="_blank">Sobre</a>
+    <a href="/login?acao=Logout" target="_blank">Logout</a>
 </div>
