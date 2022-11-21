@@ -11,42 +11,36 @@ import java.util.ArrayList;
  *
  * @author felip
  */
-public class Medico {
-    
+public class Medico extends Usuario {
+
     private String crm;
     private String estadocrm;
-    private String autorizado;
-    private String idespecialidade;
-    
-    public Medico(String id, String nome, String crm, String estadocrm, String cpf, String senha, String autorizado, String especialidade){
+
+    private int idespecialidade;
+
+    public Medico() {
+        super();
+    }
+
+    public Medico(String nome, String cpf, String senha, String crm, String estadocrm, int idespecialidade) {
+        super(nome, cpf, senha);
         this.crm = crm;
         this.estadocrm = estadocrm;
-        this.autorizado = autorizado;
-        this.idespecialidade = especialidade;
+        this.idespecialidade = idespecialidade;
     }
-    
-    public Medico(String nome, String crm, String estadocrm, String cpf, String senha, String autorizado, String especialidade){
-        this.crm = crm;
-        this.estadocrm = estadocrm;
-        this.autorizado = autorizado;
-        this.idespecialidade = especialidade;
-    }
-    
-    public String getCrm(){
+
+    public String getCrm() {
         return this.crm;
     }
-    public String getEstadoCrm(){
+
+    public String getEstadoCrm() {
         return this.estadocrm;
     }
-    
-    public String getAutorizado(){
-        return this.autorizado;
-    }
-    
-    public String getIdEspecialidade(){
+
+    public int getIdEspecialidade() {
         return this.idespecialidade;
     }
-    
+
     public void setCrm(String crm) {
         this.crm = crm;
     }
@@ -55,11 +49,7 @@ public class Medico {
         this.estadocrm = estadocrm;
     }
 
-    public void setAutorizado(String autorizado) {
-        this.autorizado = autorizado;
-    }
-
-    public void setIdEspecialidade(String idespecialidade) {
+    public void setIdEspecialidade(int idespecialidade) {
         this.idespecialidade = idespecialidade;
-    }    
+    }
 }

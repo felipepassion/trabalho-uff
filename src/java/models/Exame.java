@@ -13,43 +13,40 @@ import java.util.List;
  * @author felip
  */
 public class Exame {
-    
-    private String id;
-    private String idtipoexame;
-    private String idconsulta;
 
-    public Exame(String idtipoexame, String idconsulta) {
+    private int id;
+    private int idtipoexame;
+    private int idconsulta;
+
+    public Exame() {
+        super();
+    }
+    public Exame(int idtipoexame, int idconsulta) {
         this.idtipoexame = idtipoexame;
         this.idconsulta = idconsulta;
     }
-    
-    public Exame(String id, String idtipoexame, String idconsulta) {
-        this.id = id;
-        this.idtipoexame = idtipoexame;
-        this.idconsulta = idconsulta;
-    }
-    
-    public String getId(){
+
+    public int getId() {
         return this.id;
     }
-    
-    public String getIdTipoExame(){
+
+    public int getIdTipoExame() {
         return this.idtipoexame;
     }
-        
-    public String getIdConsulta(){
+
+    public int getIdConsulta() {
         return this.idconsulta;
     }
-    
-    public void setId(String id) {
-        this.id=id;
+
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setIdTipoExame(String idtipoexame) {
-        this.idtipoexame=idtipoexame;
+    public void setIdTipoExame(int idtipoexame) {
+        this.idtipoexame = idtipoexame;
     }
 
-    public void setIdConsulta(String idconsulta) {
-        this.idconsulta=idconsulta;
+    public void setIdConsulta(int idconsulta) {
+        this.idconsulta = idconsulta;
     }
 }

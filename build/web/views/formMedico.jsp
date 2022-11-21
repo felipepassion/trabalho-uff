@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.TipoPlano"%>
+<%@page import="models.Especialidade"%>
 <%@page import="models.Medico"%>
 
 <head>
@@ -54,13 +54,23 @@
                     <input type="text" name="senha" <%= acao.equals("Excluir") ? "Readonly" : ""%>
                         value="<%=medico.getSenha()%>" class="form-control">
                 </div>
-                <select class="form-select d-block w-100 form-control" id="idtipoplano" name="idtipoplano" required>
-                    <option value="">Escolha o plano.</option>
+                <div class="mb-3">
+                    <label for="crm" class="form-label">CRM</label>
+                    <input type="text" name="crm" <%= acao.equals("Excluir") ? "Readonly" : ""%>
+                        value="<%=medico.getCrm()%>" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="crmestado" class="form-label">Estado do CRM</label>
+                    <input type="text" name="crmestado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
+                        value="<%=medico.getEstadoCrm()%>" class="form-control">
+                </div>
+                <select class="form-select d-block w-100 form-control" id="idespecialidade" name="idespecialidade" required>
+                    <option value="">Escolha a Especialidade do M�dico.</option>
                     <%
-                    ArrayList<TipoPlano> listaDePlanos = (ArrayList<TipoPlano>) request.getAttribute("listaDePlanos");
-                        for (TipoPlano tipoPlano : listaDePlanos) {
-                            out.println("<option value= '"+tipoPlano.getId()+"'>");
-                                out.println(tipoPlano.getDescricao());
+                    ArrayList<Especialidade> listaDeEspecialidade = (ArrayList<Especialidade>) request.getAttribute("listaDeEspecialidade");
+                        for (Especialidade especialidade : listaDeEspecialidade) {
+                            out.println("<option value= '"+especialidade.getId()+"'>");
+                                out.println(especialidade.getDescricao());
                                 out.println("</option>");
                             }
                             %>
