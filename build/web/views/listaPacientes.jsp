@@ -1,3 +1,4 @@
+<%@page import="models.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Paciente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -7,6 +8,19 @@
     <link href="bootstrap/site.css" rel="stylesheet" type="text/css"/>
     <link href="bootstrap/ionic.bootstrap.css" rel="stylesheet" type="text/css"/>
 </head>
+
+                            <%
+// testar se está logado
+HttpSession sessao = request.getSession(false);
+if (sessao != null) {
+    Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+    if (usuarioLogado == null) { %>
+        <script>
+            window.location.href = 'paciente?acao=Inserir';
+        </script>
+<%  } else { %>
+
+
 <div class="page">
     <jsp:include page="menu.jsp" />
     <main>
@@ -16,7 +30,7 @@
         <article class="content px-4">
             <div class="mt-5">
 
-                <h1>Área Restrita</h1>
+                <h1>Área Pública</h1>
                 <h2>Lista de Pacientes</h2>
 
                 <%  String msgOperacaoRealizada = (String) request.getAttribute("msgOperacaoRealizada");
@@ -63,4 +77,6 @@
             </div>
         </article>
     </main>
-</div>
+</div>                                 
+<%    }
+}%>

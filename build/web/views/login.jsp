@@ -13,12 +13,12 @@
         <div class="container">
             <div class="col-sm-6 offset-3 mt-5">
                 <%
-                String msgError = (String) request.getAttribute("msgError");
-                if ((msgError != null) && (!msgError.isEmpty())) {%>
-                    <div class="alert alert-danger" role="alert">
-                       <%= msgError %>
-                    </div>
-            <% }%>
+                    String msgError = (String) request.getAttribute("msgError");
+                    if ((msgError != null) && (!msgError.isEmpty())) {%>
+                <div class="alert alert-danger" role="alert">
+                    <%= msgError%>
+                </div>
+                <% }%>
                 <h3>Login no Sistema</h3>
                 <form action="login" method="POST">
                     <div class="mb-3">
@@ -31,9 +31,10 @@
                     </div>
                     <div>
                         <button type="submit" value="Login" class="btn btn-primary">Login</button>
+                        <a style="float:right" href="/paciente?acao=Inserir" target="_blank">Cadastrar</a>
                     </div>
                 </form>
-            </div>
+            </div> 
         </div>
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>

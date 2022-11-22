@@ -1,3 +1,18 @@
+<%@page import="models.Usuario"%>
+
+<%
+    Usuario usuarioLogado = null;
+// testar se está logado
+    HttpSession sessao = request.getSession(false);
+    if (sessao != null) {
+        usuarioLogado = (Usuario) session.getAttribute("usuario");
+        if (usuarioLogado != null) { %>
+
+<%  } else { %>
+
+
+<%}}%>
+
 <div class="page">
 
     <div class="sidebar">
@@ -22,7 +37,7 @@
                         <span class="oi oi-person" aria-hidden="true"></span> Pacientes
                     </a>
                 </div>
-
+ <%if (usuarioLogado != null) {%>
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
                         <span class="oi oi-person" aria-hidden="true"></span>  Médicos
@@ -64,6 +79,8 @@
                         <span class="oi oi-people" aria-hidden="true"></span> Criar Administradores
                     </a>
                 </div>
+                        <%}%> 
+
             </nav>
         </div>
     </div>
