@@ -1,6 +1,13 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\java",
+    "\\src\\java\\controller",
+    "\\src\\java\\models",
+    "\\web",
+    "\\web\\views"
   ],
+  "SelectedNode": "\\src\\java\\controller\\login.java",
   "PreviewInSolutionExplorer": false
 }

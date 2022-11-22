@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.ConsultaDAO;
 import DAO.MedicoDAO;
 import DAO.PacienteDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Consulta;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import models.Medico;
 import models.Paciente;
+import models.Usuario;
 
-@WebServlet(name = "consulta", urlPatterns = { "/consulta" })
+@WebServlet(name = "consulta", urlPatterns = {"/consulta"})
 public class consulta extends HttpServlet {
 
     @Override
@@ -57,14 +61,34 @@ public class consulta extends HttpServlet {
                 break;
 
         }
+        HttpSession session = request.getSession();
+        String tipoConta = (String) session.getAttribute("tipoUsuario");
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 
+        ArrayList<Paciente> listaDePacientes = new ArrayList<Paciente>();
         PacienteDAO pacienteDAO = new PacienteDAO();
-        ArrayList<Paciente> listaDePacientes = pacienteDAO.ListaDePacientes();
+        
+        MedicoDAO medicoDAO = new MedicoDAO();
+        ArrayList<Medico> listaDeMedicos = new ArrayList<Medico>();
+        request.setAttribute("listaDeMedicos", listaDeMedicos);
+        
+        try {
+            if (tipoConta == Enums.TipoConta.Paciente) {
+                listaDeMedicos = medicoDAO.ListaDeMedicos();
+                listaDePacientes.add(pacienteDAO.getPaciente(usuarioLogado.getId()));
+
+            } else {
+                listaDePacientes = pacienteDAO.ListaDePacientes();
+                if (tipoConta == Enums.TipoConta.Medico) {
+                    listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         request.setAttribute("listaDePacientes", listaDePacientes);
 
-        MedicoDAO medicoDAO = new MedicoDAO();
-        ArrayList<Medico> listaDeMedicos = medicoDAO.ListaDeMedicos();
-        request.setAttribute("listaDeMedicos", listaDeMedicos);
+        
 
         request.setAttribute("consulta", consulta);
         request.setAttribute("msgError", "");
@@ -84,8 +108,11 @@ public class consulta extends HttpServlet {
         String idpaciente = request.getParameter("idpaciente");
         String idmedico = request.getParameter("idmedico");
         String realizada = request.getParameter("realizada");
-        if(realizada == null)
+
+        if (realizada == null) {
             realizada = "N";
+        }
+
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;

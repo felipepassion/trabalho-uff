@@ -67,7 +67,7 @@
                         <option value="N">Não</option>
                     </select>
                 </div>
-                <%}%> 
+                <%} %> 
                 <div class="mb-3">
                     <label for="data" class="form-label">Paciente</label>
                     <select class="form-select d-block w-100 form-control" id="idpaciente" name="idpaciente" required>

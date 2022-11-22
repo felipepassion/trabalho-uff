@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import models.Consulta;
 
 public class ConsultaDAO {
@@ -89,11 +90,17 @@ public class ConsultaDAO {
         }
     }
 
+    /**
+     *
+     * @param pacienteId
+     * @return
+     */
     public ArrayList<Consulta> ListaDeConsultas() {
         ArrayList<Consulta> meusConsultas = new ArrayList();
         Conexao conexao = new Conexao();
         try {
             String selectSQL = "SELECT * FROM consulta order by Descricao";
+            
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
