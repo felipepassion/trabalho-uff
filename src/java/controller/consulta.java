@@ -30,15 +30,54 @@ public class consulta extends HttpServlet {
         if (acao == null || acao == "") {
             acao = "Listar";
         }
+        HttpSession session = request.getSession();
+        String tipoConta = (String) session.getAttribute("tipoUsuario");
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 
         Consulta consulta = new Consulta();
         ConsultaDAO consultaDAO = new ConsultaDAO();
         RequestDispatcher rd;
+
+        ArrayList<Paciente> listaDePacientes = new ArrayList<Paciente>();
+        PacienteDAO pacienteDAO = new PacienteDAO();
+
+        MedicoDAO medicoDAO = new MedicoDAO();
+        ArrayList<Medico> listaDeMedicos = new ArrayList<Medico>();
+
+        try {
+            if (tipoConta == Enums.TipoConta.Paciente) {
+                listaDeMedicos = medicoDAO.ListaDeMedicos();
+                listaDePacientes.add(pacienteDAO.getPaciente(usuarioLogado.getId()));
+
+            } else {
+                listaDePacientes = pacienteDAO.ListaDePacientes();
+                if (tipoConta == Enums.TipoConta.Medico) {
+                    listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(consulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        request.setAttribute("listaDeMedicos", listaDeMedicos);
+        request.setAttribute("listaDePacientes", listaDePacientes);
+        
         switch (acao) {
             case "Listar":
                 try {
+
+                    ArrayList<Consulta> listaConsultas = new ArrayList<Consulta>();
+
+                    if (tipoConta == Enums.TipoConta.Paciente) {
+                        listaConsultas = consultaDAO.ListaDeConsultasPaciente(usuarioLogado.getId());
+                    } else if (tipoConta == Enums.TipoConta.Medico) {
+                        listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
+                    } else {
+                        listaConsultas = consultaDAO.ListaDeConsultas();
+                    }
+
                     request.setAttribute("msgOperacaoRealizada", "");
-                    ArrayList<Consulta> listaConsultas = consultaDAO.ListaDeConsultas();
+
                     request.setAttribute("listaConsultas", listaConsultas);
                     rd = request.getRequestDispatcher("/views/listaConsultas.jsp");
                     rd.forward(request, response);
@@ -61,34 +100,6 @@ public class consulta extends HttpServlet {
                 break;
 
         }
-        HttpSession session = request.getSession();
-        String tipoConta = (String) session.getAttribute("tipoUsuario");
-        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
-
-        ArrayList<Paciente> listaDePacientes = new ArrayList<Paciente>();
-        PacienteDAO pacienteDAO = new PacienteDAO();
-        
-        MedicoDAO medicoDAO = new MedicoDAO();
-        ArrayList<Medico> listaDeMedicos = new ArrayList<Medico>();
-        request.setAttribute("listaDeMedicos", listaDeMedicos);
-        
-        try {
-            if (tipoConta == Enums.TipoConta.Paciente) {
-                listaDeMedicos = medicoDAO.ListaDeMedicos();
-                listaDePacientes.add(pacienteDAO.getPaciente(usuarioLogado.getId()));
-
-            } else {
-                listaDePacientes = pacienteDAO.ListaDePacientes();
-                if (tipoConta == Enums.TipoConta.Medico) {
-                    listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(consulta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("listaDePacientes", listaDePacientes);
-
-        
 
         request.setAttribute("consulta", consulta);
         request.setAttribute("msgError", "");
@@ -151,6 +162,21 @@ public class consulta extends HttpServlet {
 
             ConsultaDAO consultaDAO = new ConsultaDAO();
 
+            ArrayList<Consulta> listaConsultas = new ArrayList<Consulta>();
+                HttpSession session = request.getSession();
+                String tipoConta = (String) session.getAttribute("tipoUsuario");
+                Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+
+                if (tipoConta == Enums.TipoConta.Paciente) {
+                    listaConsultas = consultaDAO.ListaDeConsultasPaciente(usuarioLogado.getId());
+                } else if (tipoConta == Enums.TipoConta.Medico) {
+                    listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
+                } else {
+                    listaConsultas = consultaDAO.ListaDeConsultas();
+                }
+
+                request.setAttribute("listaConsultas", listaConsultas);
+                
             try {
                 switch (btEnviar) {
                     case "Incluir":
@@ -167,8 +193,7 @@ public class consulta extends HttpServlet {
                         break;
                 }
 
-                ArrayList<Consulta> listaConsultas = consultaDAO.ListaDeConsultas();
-                request.setAttribute("listaConsultas", listaConsultas);
+                
 
                 rd = request.getRequestDispatcher("/views/listaConsultas.jsp");
                 rd.forward(request, response);

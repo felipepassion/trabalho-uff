@@ -47,6 +47,8 @@
             </div>
         </article>
 
+        <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Adm) {%>
+        
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
@@ -55,8 +57,7 @@
                 </span>
             </div>
         </article>
-
-        <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Adm) {%>
+        
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-graph me-2" aria-hidden="true"></span>

@@ -13,14 +13,14 @@ public class ExameDAO {
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao()
-                    .prepareStatement("INSERT INTO exame (idtipoexame, idconsulta)"
+                    .prepareStatement("INSERT INTO exames (idtipoexame, idconsulta)"
                             + " VALUES (?,?)");
             sql.setInt(1, exame.getIdTipoExame());
             sql.setInt(2, exame.getIdConsulta());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         } finally {
             conexao.closeConexao();
         }

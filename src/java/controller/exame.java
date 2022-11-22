@@ -12,14 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.ExameDAO;
 import DAO.MedicoDAO;
 import DAO.TipoExameDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Exame;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import models.Consulta;
 import models.Exame;
 import models.Medico;
 import models.TipoExame;
+import models.Usuario;
 
-@WebServlet(name = "exame", urlPatterns = { "/exame" })
+@WebServlet(name = "exame", urlPatterns = {"/exame"})
 public class exame extends HttpServlet {
 
     @Override
@@ -30,6 +34,10 @@ public class exame extends HttpServlet {
         if (acao == null || acao == "") {
             acao = "Listar";
         }
+
+        HttpSession session = request.getSession();
+        String tipoConta = (String) session.getAttribute("tipoUsuario");
+        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 
         Exame exame = new Exame();
         ExameDAO exameDAO = new ExameDAO();
@@ -67,8 +75,17 @@ public class exame extends HttpServlet {
         ArrayList<TipoExame> listaDeTipoExames = tipoExameDAO.ListaDeTipoExames();
         request.setAttribute("listaDeTipoExames", listaDeTipoExames);
 
+        ArrayList<Consulta> listaDeConsultas = new ArrayList<Consulta>();
         ConsultaDAO consultaDAO = new ConsultaDAO();
-        ArrayList<Consulta> listaDeConsultas = consultaDAO.ListaDeConsultas();
+
+        if (tipoConta == Enums.TipoConta.Paciente) {
+            listaDeConsultas = consultaDAO.ListaDeConsultasPaciente(usuarioLogado.getId());
+        } else if (tipoConta == Enums.TipoConta.Medico) {
+            listaDeConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
+        } else {
+            listaDeConsultas = consultaDAO.ListaDeConsultas();
+        }
+
         request.setAttribute("listaDeConsultas", listaDeConsultas);
 
         ArrayList<Exame> listaDeExames = exameDAO.ListaDeExames();

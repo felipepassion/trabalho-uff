@@ -129,7 +129,6 @@ public class paciente extends HttpServlet {
                             session.setAttribute("usuario", usuarioObtido);
                             rd = request.getRequestDispatcher("/");
                             rd.forward(request, response);
-                            return;
                         }
                         request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                         break;

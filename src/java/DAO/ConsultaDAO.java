@@ -100,7 +100,63 @@ public class ConsultaDAO {
         Conexao conexao = new Conexao();
         try {
             String selectSQL = "SELECT * FROM consulta order by Descricao";
-            
+
+            PreparedStatement preparedStatement;
+            preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    Consulta consulta = new Consulta(resultado.getString("Data"),
+                            resultado.getString("Descricao"),
+                            resultado.getString("Realizada"),
+                            resultado.getInt("idmedico"),
+                            resultado.getInt("idpaciente"));
+                    consulta.setId(Integer.parseInt(resultado.getString("id")));
+                    meusConsultas.add(consulta);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (ListaDeConsultas) incorreta - " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+        return meusConsultas;
+    }
+
+    public ArrayList<Consulta> ListaDeConsultasPaciente(int id) {
+        ArrayList<Consulta> meusConsultas = new ArrayList();
+        Conexao conexao = new Conexao();
+        try {
+            String selectSQL = "SELECT * FROM consulta where idpaciente = " + id + " order by Descricao";
+
+            PreparedStatement preparedStatement;
+            preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    Consulta consulta = new Consulta(resultado.getString("Data"),
+                            resultado.getString("Descricao"),
+                            resultado.getString("Realizada"),
+                            resultado.getInt("idmedico"),
+                            resultado.getInt("idpaciente"));
+                    consulta.setId(Integer.parseInt(resultado.getString("id")));
+                    meusConsultas.add(consulta);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (ListaDeConsultas) incorreta - " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+        return meusConsultas;
+    }
+
+    public ArrayList<Consulta> ListaDeConsultasMedico(int id) {
+        ArrayList<Consulta> meusConsultas = new ArrayList();
+        Conexao conexao = new Conexao();
+        try {
+            String selectSQL = "SELECT * FROM consulta where idmedico = " + id + " order by Descricao";
+
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
