@@ -29,6 +29,11 @@ public class Medico extends Usuario {
         this.idespecialidade = idespecialidade;
     }
 
+    public Medico(String cpf_user, String senha_user) {
+        setCpf(cpf_user);
+        setSenha(senha_user);
+    }
+
     public String getCrm() {
         return this.crm;
     }

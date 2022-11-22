@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Paciente;
+import models.Usuario;
 
 public class PacienteDAO {
 
@@ -114,7 +115,7 @@ public class PacienteDAO {
         return meusPacientes;
     }
 
-    public Paciente Logar(Paciente paciente) throws SQLException {
+    public Usuario Logar(Paciente paciente) throws SQLException {
         Conexao conexao = new Conexao();
 
         PreparedStatement sql = conexao.getConexao()
@@ -122,15 +123,14 @@ public class PacienteDAO {
         sql.setString(1, paciente.getCpf());
         sql.setString(2, paciente.getSenha());
         ResultSet resultado = sql.executeQuery();
-        Paciente pacienteObtido = new Paciente();
+        Usuario pacienteObtido = null;
         if (resultado != null) {
+            pacienteObtido = new Paciente();
             while (resultado.next()) {
                 pacienteObtido.setId(Integer.parseInt(resultado.getString("ID")));
                 pacienteObtido.setNome(resultado.getString("NOME"));
                 pacienteObtido.setCpf(resultado.getString("CPF"));
                 pacienteObtido.setSenha(resultado.getString("SENHA"));
-                pacienteObtido.setIdTipoPlano(resultado.getInt("IDTIPOPLANO"));
-
             }
         }
         return pacienteObtido;

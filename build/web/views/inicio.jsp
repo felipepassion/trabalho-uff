@@ -1,8 +1,10 @@
 <%@page import="models.Usuario"%>
 
+
 <%
+    String tipoConta = (String)session.getAttribute("tipoUsuario");
     Usuario usuarioLogado = null;
-// testar se está logado
+// testar se estï¿½ logado
     HttpSession sessao = request.getSession(false);
     if (sessao != null) {
         usuarioLogado = (Usuario) session.getAttribute("usuario");
@@ -12,7 +14,6 @@
 
 
 <%}}%>
-
 
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -24,7 +25,7 @@
     <main>
 
         <jsp:include page="header.jsp" />
-
+<h1><%= tipoConta %></h1>
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-person me-2" aria-hidden="true"></span>
@@ -39,7 +40,7 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-graph me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="tipoPlano">Planos de Saúde</a>
+                    <a href="tipoPlano">Planos de Saï¿½de</a>
                 </span>
             </div>
         </article>
@@ -48,7 +49,7 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-graph me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="especialidade">Especialidades Médicas</a>
+                    <a href="especialidade">Especialidades Mï¿½dicas</a>
                 </span>
             </div>
         </article>
@@ -57,7 +58,7 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="medico">Médicos</a>
+                    <a href="medico">Mï¿½dicos</a>
                 </span>
             </div>
         </article>
@@ -66,7 +67,7 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="tipoPlano">Planos de saúde</a>
+                    <a href="tipoPlano">Planos de saï¿½de</a>
                 </span>
             </div>
         </article>

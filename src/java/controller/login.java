@@ -4,7 +4,10 @@
  */
 package controller;
 
+import DAO.MedicoDAO;
+import DAO.PacienteDAO;
 import DAO.UsuarioDAO;
+import static Enums.TipoConta.Medico;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,12 +26,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Medico;
+import models.Paciente;
 
 /**
  *
  * @author felip
  */
-@WebServlet(name = "login", urlPatterns = { "/login" })
+@WebServlet(name = "login", urlPatterns = {"/login"})
 public class login extends HttpServlet {
 
     @Override
@@ -68,18 +73,46 @@ public class login extends HttpServlet {
             rd.forward(request, response);
 
         } else {
-            Usuario usuarioObtido;
-            Usuario usuario = new Usuario(cpf_user, senha_user);
+            Usuario usuarioObtido = null;
             UsuarioDAO usuarioDAO = new UsuarioDAO();
+            PacienteDAO pacienteDAO = new PacienteDAO();
+            boolean loginSuccess = false;
+
+            Paciente pacienteObtido;
+            Paciente paciente = new Paciente(cpf_user, senha_user);
+            HttpSession session = request.getSession();
+
             try {
-                usuarioObtido = usuarioDAO.Logar(usuario);
+                usuarioObtido = pacienteDAO.Logar(paciente);
+                if (usuarioObtido.getId() == 0) {
+                    Medico medicoObtido;
+                    Medico medico = new Medico(cpf_user, senha_user);
+                    MedicoDAO medicoDAO = new MedicoDAO();
+                    usuarioObtido = medicoDAO.Logar(medico);
+
+                    try {
+                        if (usuarioObtido.getId() == 0) {
+                            Usuario usuario = new Usuario(cpf_user, senha_user);
+                            usuarioObtido = usuarioDAO.Logar(usuario);
+                            if (usuarioObtido.getId() != 0) {
+                                session.setAttribute("tipoUsuario", Enums.TipoConta.Adm);
+                            }
+                        } else {
+                            session.setAttribute("tipoUsuario", Enums.TipoConta.Medico);
+                        }
+                    } catch (Exception ex) {
+                        throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
+                    }
+                } else {
+                    session.setAttribute("tipoUsuario", Enums.TipoConta.Paciente);
+                }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
             }
 
-            if (usuarioObtido.getId() != 0) {
-                HttpSession session = request.getSession();
+            if (usuarioObtido != null) {
+
                 session.setAttribute("usuario", usuarioObtido);
 
                 rd = request.getRequestDispatcher("/");

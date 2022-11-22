@@ -97,6 +97,7 @@ public class Usuario {
     }
 
     public String getTipoConta() {
+        
         if (getMedico() != null) {
             return TipoConta.Medico;
         }

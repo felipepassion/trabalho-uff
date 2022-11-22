@@ -6,6 +6,11 @@ import java.util.ArrayList;
 public class Paciente extends Usuario {
     
     private int idTipoPlano;
+
+    public Paciente(String cpf_user, String senha_user) {
+        setCpf(cpf_user);
+        setSenha(senha_user);
+    }
     
     public int getIdTipoPlano() {
         return idTipoPlano;

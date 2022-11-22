@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Medico;
+import models.Usuario;
 
 public class MedicoDAO {
 
@@ -123,7 +124,7 @@ public class MedicoDAO {
         return meusMedicos;
     }
 
-    public Medico Logar(Medico medico) throws SQLException {
+    public Usuario Logar(Medico medico) throws SQLException {
         Conexao conexao = new Conexao();
 
         PreparedStatement sql = conexao.getConexao()
@@ -131,8 +132,9 @@ public class MedicoDAO {
         sql.setString(1, medico.getCpf());
         sql.setString(2, medico.getSenha());
         ResultSet resultado = sql.executeQuery();
-        Medico medicoObtido = new Medico();
+        Usuario medicoObtido = null;
         if (resultado != null) {
+            medicoObtido = new Usuario();
             while (resultado.next()) {
                 medicoObtido.setId(Integer.parseInt(resultado.getString("ID")));
                 medicoObtido.setNome(resultado.getString("NOME"));
