@@ -11,7 +11,9 @@ import DAO.PacienteDAO;
 import DAO.TipoPlanoDAO;
 import models.Paciente;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 import models.TipoPlano;
+import models.Usuario;
 
 @WebServlet(name = "paciente", urlPatterns = { "/paciente" })
 public class paciente extends HttpServlet {
@@ -120,6 +122,15 @@ public class paciente extends HttpServlet {
                 switch (btEnviar) {
                     case "Incluir":
                         pacienteDAO.Inserir(paciente);
+                        HttpSession session = request.getSession();
+                        Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+                        if(usuarioLogado == null){
+                            Usuario usuarioObtido = pacienteDAO.Logar(new Paciente(cpf_user, senha_user));
+                            session.setAttribute("usuario", usuarioObtido);
+                            rd = request.getRequestDispatcher("/");
+                            rd.forward(request, response);
+                            return;
+                        }
                         request.setAttribute("msgOperacaoRealizada", "Inclusão realizada com sucesso");
                         break;
                     case "Alterar":

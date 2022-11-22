@@ -84,13 +84,13 @@ public class consulta extends HttpServlet {
         String idpaciente = request.getParameter("idpaciente");
         String idmedico = request.getParameter("idmedico");
         String realizada = request.getParameter("realizada");
-
+        if(realizada == null)
+            realizada = "N";
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;
 
-        if (descricao_user.isEmpty() || data.isEmpty() || idpaciente.isEmpty() || idmedico.isEmpty()
-                || realizada.isEmpty()) {
+        if (descricao_user.isEmpty() || data.isEmpty() || idpaciente.isEmpty() || idmedico.isEmpty()) {
 
             Consulta consulta = new Consulta();
             switch (btEnviar) {

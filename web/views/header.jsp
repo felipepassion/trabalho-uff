@@ -6,7 +6,7 @@
         if (sessao != null) {
             Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
             if (usuarioLogado != null) { %>
-    <a href="#">Olá, Usuário!</a>
+    <a href="#">Olá, <%= usuarioLogado.getNome() %>!</a>
     <a href="#" target="_blank">Sobre</a>
     <a href="/login?acao=Logout" target="_blank">Logout</a>
     <%  } else { %>

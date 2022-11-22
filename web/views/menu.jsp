@@ -1,9 +1,10 @@
 <%@page import="models.Usuario"%>
 
 <%
+    HttpSession sessao = request.getSession(false);
+    String tipoConta = (String) session.getAttribute("tipoUsuario");
     Usuario usuarioLogado = null;
 // testar se está logado
-    HttpSession sessao = request.getSession(false);
     if (sessao != null) {
         usuarioLogado = (Usuario) session.getAttribute("usuario");
         if (usuarioLogado != null) { %>
@@ -11,7 +12,8 @@
 <%  } else { %>
 
 
-<%}}%>
+<%}
+    }%>
 
 <div class="page">
 
@@ -37,7 +39,20 @@
                         <span class="oi oi-person" aria-hidden="true"></span> Pacientes
                     </a>
                 </div>
- <%if (usuarioLogado != null) {%>
+                <%if (usuarioLogado != null) {%>
+                <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Adm) {%>
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="exame" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Exame
+                    </a>
+                </div>                
+
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Consulta
+                    </a>
+                </div>  
+
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
                         <span class="oi oi-person" aria-hidden="true"></span>  Médicos
@@ -50,18 +65,6 @@
                     </a>
                 </div>
 
-                <div class="nav-item px-3">
-                    <a class="nav-link" href="exame" Match="NavLinkMatch.All">
-                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Exame
-                    </a>
-                </div>                
-
-                <div class="nav-item px-3">
-                    <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
-                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Consulta
-                    </a>
-                </div>  
-                
                 <div class="nav-item px-3">
                     <a class="nav-link active" href="tipoPlano" Match="NavLinkMatch.All">
                         <span class="oi oi-book" aria-hidden="true"></span> Planos de Saúde
@@ -79,7 +82,8 @@
                         <span class="oi oi-people" aria-hidden="true"></span> Criar Administradores
                     </a>
                 </div>
-                        <%}%> 
+                <%}%> 
+                <%}%> 
 
             </nav>
         </div>

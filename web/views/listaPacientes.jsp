@@ -16,7 +16,7 @@ if (sessao != null) {
     Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
     if (usuarioLogado == null) { %>
         <script>
-            window.location.href = 'paciente?acao=Inserir';
+            window.location.href = 'paciente?acao=Incluir';
         </script>
 <%  } else { %>
 

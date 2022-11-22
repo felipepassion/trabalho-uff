@@ -111,7 +111,7 @@ public class login extends HttpServlet {
                 throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
             }
 
-            if (usuarioObtido != null) {
+            if (usuarioObtido.getId() != 0) {
 
                 session.setAttribute("usuario", usuarioObtido);
 

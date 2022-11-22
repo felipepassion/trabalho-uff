@@ -66,12 +66,12 @@
                 <div class="mb-3">
                     <label for="data" class="form-label">Consulta</label>
                     <select class="form-select d-block w-100 form-control" id="idconsulta" name="idconsulta" required>
-                        <option value="">Escolha o Médico</option>
+                        <option value="">Escolha a Consulta</option>
                         <%
                     ArrayList<Consulta> listaDeConsulta = (ArrayList<Consulta>) request.getAttribute("listaDeConsultas");
                         for (Consulta consulta : listaDeConsulta) {
                             String str = "";
-                            if (exame != null &&exame.getId() == consulta.getId()){
+                            if (exame != null && exame.getId() == consulta.getId()){
                                 str = "selected";
                             }
                             out.println("<option "+str+" value= '"+consulta.getId()+"'>");
