@@ -162,21 +162,6 @@ public class consulta extends HttpServlet {
 
             ConsultaDAO consultaDAO = new ConsultaDAO();
 
-            ArrayList<Consulta> listaConsultas = new ArrayList<Consulta>();
-                HttpSession session = request.getSession();
-                String tipoConta = (String) session.getAttribute("tipoUsuario");
-                Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
-
-                if (tipoConta == Enums.TipoConta.Paciente) {
-                    listaConsultas = consultaDAO.ListaDeConsultasPaciente(usuarioLogado.getId());
-                } else if (tipoConta == Enums.TipoConta.Medico) {
-                    listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
-                } else {
-                    listaConsultas = consultaDAO.ListaDeConsultas();
-                }
-
-                request.setAttribute("listaConsultas", listaConsultas);
-                
             try {
                 switch (btEnviar) {
                     case "Incluir":
@@ -193,7 +178,20 @@ public class consulta extends HttpServlet {
                         break;
                 }
 
-                
+                ArrayList<Consulta> listaConsultas = new ArrayList<Consulta>();
+                HttpSession session = request.getSession();
+                String tipoConta = (String) session.getAttribute("tipoUsuario");
+                Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+
+                if (tipoConta == Enums.TipoConta.Paciente) {
+                    listaConsultas = consultaDAO.ListaDeConsultasPaciente(usuarioLogado.getId());
+                } else if (tipoConta == Enums.TipoConta.Medico) {
+                    listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
+                } else {
+                    listaConsultas = consultaDAO.ListaDeConsultas();
+                }
+
+                request.setAttribute("listaConsultas", listaConsultas);
 
                 rd = request.getRequestDispatcher("/views/listaConsultas.jsp");
                 rd.forward(request, response);

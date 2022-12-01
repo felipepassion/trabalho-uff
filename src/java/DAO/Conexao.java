@@ -13,7 +13,7 @@ public class Conexao {
             Class.forName("com.mysql.jdbc.Driver"); //load driver  
             conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinica", "root", "");
         } catch (SQLException e) {
-            throw new RuntimeException("Nao foi possivel efetuar uma conexao com o BD!");
+            throw new RuntimeException("Nao foi possivel efetuar uma conexao com o BD! - " + e.getMessage());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Nao foi possivel encontrar a classe referente! Verifique o driver!");
         }
