@@ -35,6 +35,24 @@
                 </span>
             </div>
         </article>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-person me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="login">Login Médico</a>
+                </span>
+            </div>
+        </article>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-person me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="login">Login Adm</a>
+                </span>
+            </div>
+        </article>
 
         <%if (usuarioLogado != null) {%>
 
