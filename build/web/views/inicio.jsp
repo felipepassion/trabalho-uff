@@ -35,6 +35,7 @@
                 <span class="oi oi-person me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
                     <a href="login">Login de Pacientes</a>
+                    <p>Marcar e visualizar consultas</p>
                 </span>
             </div>
         </article>
@@ -44,7 +45,7 @@
                 <span class="oi oi-person me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
                     <a href="login">Login de Médicos</a>
-                    <p>Cadastrar outros ADMs, Médicos, Pacientes, Planos de Saúde e Especialidades Médicos</p>
+                    <p>Marcar e visualizar consultas e solicitar exames</p>
                 </span>
             </div>
         </article>
