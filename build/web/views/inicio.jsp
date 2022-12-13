@@ -25,7 +25,9 @@
     <jsp:include page="menu.jsp" />
     <main>
         <jsp:include page="header.jsp" />
-
+            
+        
+        
         <%if (usuarioLogado == null) {%>
 
         <<article class="content px-4">
@@ -63,10 +65,20 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="consulta">Marcar Consulta</a>
+                    <a href="consulta?acao=Incluir">Marcar Consulta</a>
                 </span>
             </div>
         </article>
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-book me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="consulta">Consultas realizadas</a>
+                </span>
+            </div>
+        </article>
+        <% } %>
+        <%if (tipoConta == Enums.TipoConta.Medico) {%>
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
