@@ -24,38 +24,41 @@
 <div class="page">
     <jsp:include page="menu.jsp" />
     <main>
-
         <jsp:include page="header.jsp" />
 
-        <article class="content px-4">
+        <%if (usuarioLogado == null) {%>
+
+        <<article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-person me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="paciente">Pacientes</a>
-                </span>
-            </div>
-        </article>
-        
-        <article class="content px-4">
-            <div class="alert alert-secondary mt-4">
-                <span class="oi oi-person me-2" aria-hidden="true"></span>
-                <span class="text-nowrap">
-                    <a href="login">Login Médico</a>
-                </span>
-            </div>
-        </article>
-        
-        <article class="content px-4">
-            <div class="alert alert-secondary mt-4">
-                <span class="oi oi-person me-2" aria-hidden="true"></span>
-                <span class="text-nowrap">
-                    <a href="login">Login Adm</a>
+                    <a href="login">Login de Pacientes</a>
                 </span>
             </div>
         </article>
 
-        <%if (usuarioLogado != null) {%>
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-person me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="login">Login de Médicos</a>
+                    <p>Cadastrar outros ADMs, Médicos, Pacientes, Planos de Saúde e Especialidades Médicos</p>
+                </span>
+            </div>
+        </article>
 
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-person me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="login">Login de Administradores</a>
+                    <p>Cadastrar outros ADMs, Médicos, Pacientes, Planos de Saúde e Especialidades Médicos</p>
+                </span>
+            </div>
+        </article>
+        <% } %>
+
+        <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Paciente) {%>
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
@@ -64,18 +67,20 @@
                 </span>
             </div>
         </article>
-
-        <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Adm) {%>
-        
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="exame">Marcar Exame</a>
+                    <a href="exame">Solicitar Exame</a>
                 </span>
             </div>
         </article>
+        <% } %>
         
+        <%if (tipoConta == Enums.TipoConta.Adm) {%>
+
+        
+
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-graph me-2" aria-hidden="true"></span>
@@ -107,7 +112,7 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
-                    <a href="tipoPlano">Planos de saúde</a>
+                    <a href="tipoPlano">Planos de súde</a>
                 </span>
             </div>
         </article>
@@ -129,7 +134,6 @@
                 </span>
             </div>
         </article>
-        <%}%>         
         <%}%> 
 
     </main>

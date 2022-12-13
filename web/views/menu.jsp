@@ -4,7 +4,7 @@
     HttpSession sessao = request.getSession(false);
     String tipoConta = (String) session.getAttribute("tipoUsuario");
     Usuario usuarioLogado = null;
-// testar se está logado
+// testar se estï¿½ logado
     if (sessao != null) {
         usuarioLogado = (Usuario) session.getAttribute("usuario");
         if (usuarioLogado != null) { %>
@@ -28,6 +28,8 @@
         </div>
 
         <div class="">
+            <%if (usuarioLogado == null) {%>
+
             <nav class="flex-column">
                 <div class="nav-item px-3">
                     <a class="nav-link active" href="/" Match="NavLinkMatch.All">
@@ -36,29 +38,29 @@
                 </div>
                 <div class="nav-item px-3">
                     <a class="nav-link active" href="paciente" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> Pacientes
+                        <span class="oi oi-person" aria-hidden="true"></span> Login de Pacientes
                     </a>
                 </div>
+                <div class="nav-item px-3">
+                    <a class="nav-link active" href="paciente" Match="NavLinkMatch.All">
+                        <span class="oi oi-person" aria-hidden="true"></span> Login de Médicos
+                    </a>
+                </div>
+                <div class="nav-item px-3">
+                    <a class="nav-link active" href="paciente" Match="NavLinkMatch.All">
+                        <span class="oi oi-person" aria-hidden="true"></span> Login de Administradores
+                    </a>
+                </div>
+                <% } %>
+
                 <%if (usuarioLogado != null) {%>
-                <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Adm) {%>
-                <div class="nav-item px-3">
-                    <a class="nav-link" href="exame" Match="NavLinkMatch.All">
-                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Exame
-                    </a>
-                </div>                
-
-                <div class="nav-item px-3">
-                    <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
-                        <span class="oi oi-medical-cross" aria-hidden="true"></span>  Marcar Consulta
-                    </a>
-                </div>  
-
+                
+                <%if (tipoConta == Enums.TipoConta.Adm) {%>
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span>  Médicos
+                        <span class="oi oi-person" aria-hidden="true"></span> Lista de Médicos
                     </a>
                 </div>
-
                 <div class="nav-item px-3">
                     <a class="nav-link" href="especialidade" Match="NavLinkMatch.All">
                         <span class="oi oi-graph" aria-hidden="true"></span> Especialidades Médicas
@@ -70,7 +72,6 @@
                         <span class="oi oi-book" aria-hidden="true"></span> Planos de Saúde
                     </a>
                 </div>
-
                 <div class="nav-item px-3">
                     <a class="nav-link" href="tipoExame" Match="NavLinkMatch.All">
                         <span class="oi oi-book" aria-hidden="true"></span>  Tipos de Exame
@@ -82,6 +83,23 @@
                         <span class="oi oi-people" aria-hidden="true"></span> Criar Administradores
                     </a>
                 </div>
+                <% } %>
+
+                <%if (tipoConta == Enums.TipoConta.Medico) {%>
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="exame" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span> Solicitar Exame
+                    </a>
+                </div>
+                <% } %>
+                
+                <%if (tipoConta == Enums.TipoConta.Paciente || tipoConta == Enums.TipoConta.Medico) {%>
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
+                        <span class="oi oi-medical-cross" aria-hidden="true"></span> Minhas Consultas
+                    </a>
+                </div>  
+
                 <%}%> 
                 <%}%> 
 

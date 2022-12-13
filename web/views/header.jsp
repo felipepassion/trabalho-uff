@@ -5,8 +5,9 @@
         HttpSession sessao = request.getSession(false);
         if (sessao != null) {
             Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
+            String tipoConta = (String) session.getAttribute("tipoUsuario");
             if (usuarioLogado != null) { %>
-    <a href="#">Olá, <%= usuarioLogado.getNome() %>!</a>
+    <a href="#">[<%= tipoConta %>] Olá, <%= usuarioLogado.getNome() %>!</a>
     <a href="#" target="_blank">Sobre</a>
     <a href="/login?acao=Logout" target="_blank">Logout</a>
     <%  } else { %>
