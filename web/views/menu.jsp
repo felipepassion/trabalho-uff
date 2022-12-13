@@ -58,7 +58,7 @@
                 <%if (tipoConta == Enums.TipoConta.Adm) {%>
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
-                        <span class="oi oi-person" aria-hidden="true"></span> Lista de Médicos
+                        <span class="oi oi-person" aria-hidden="true"></span> Médicos
                     </a>
                 </div>
                 <div class="nav-item px-3">
