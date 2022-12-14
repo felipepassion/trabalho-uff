@@ -119,7 +119,7 @@ public class tipoExame extends HttpServlet {
                             tipoExameDAO.Excluir(tipoExame);
                         } catch (Exception ex) {
                             if (ex.getMessage().contains("foreign key constraint fails")) {
-                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                request.setAttribute("msgError", "Este exame possui exames/consultas em seu nome.\n Exclua-os primeiro para poder eliminar o paciente.");
                                 rd = request.getRequestDispatcher("/views/login.jsp");
                                 rd.forward(request, response);
                             }

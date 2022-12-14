@@ -189,7 +189,7 @@ public class consulta extends HttpServlet {
                             consultaDAO.Excluir(consulta);
                         } catch (Exception ex) {
                             if (ex.getMessage().contains("foreign key constraint fails")) {
-                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                request.setAttribute("msgError", "Esta consulta possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
                                 rd = request.getRequestDispatcher("/views/login.jsp");
                                 rd.forward(request, response);
                             }
