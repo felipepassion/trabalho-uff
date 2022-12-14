@@ -1,7 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.TipoPlano"%>
 <%@page import="models.Paciente"%>
-
+<% 
+    String tipoConta = (String) session.getAttribute("tipoUsuario");
+%>
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="bootstrap/site.css" rel="stylesheet" type="text/css" />
@@ -54,11 +56,15 @@
                     <input type="text" name="senha" <%= acao.equals("Excluir") ? "Readonly" : ""%>
                         value="<%=paciente.getSenha()%>" class="form-control">
                 </div>
+                <%if (tipoConta == Enums.TipoConta.Adm) {%>
                 <div class="mb-3">
                     <label for="autorizado" class="form-label">Autorizado?</label>
                     <input type="text" name="autorizado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=paciente.getAutorizado()%>" class="form-control">
+                           value="<%=paciente.getAutorizado()%>" class="form-control">
                 </div>
+                <%} else { %>
+                <input type="hidden" name="autorizado" value="<%=paciente.getAutorizado()%>" class="form-control">
+                <%}%>
                 <select class="form-select d-block w-100 form-control" id="idtipoplano" name="idtipoplano" required>
                     <option value="">Escolha o plano.</option>
                     <%

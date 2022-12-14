@@ -1,7 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Especialidade"%>
 <%@page import="models.Medico"%>
-
+<% 
+    String tipoConta = (String) session.getAttribute("tipoUsuario");
+%>
 <head>
     <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="bootstrap/site.css" rel="stylesheet" type="text/css" />
@@ -42,33 +44,37 @@
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" name="nome" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getNome()%>" class="form-control">
+                           value="<%=medico.getNome()%>" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="cpf" class="form-label">CPF</label>
                     <input type="text" name="cpf" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getCpf()%>" class="form-control">
+                           value="<%=medico.getCpf()%>" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
                     <input type="text" name="senha" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getSenha()%>" class="form-control">
+                           value="<%=medico.getSenha()%>" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="crm" class="form-label">CRM</label>
                     <input type="text" name="crm" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getCrm()%>" class="form-control">
+                           value="<%=medico.getCrm()%>" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="crmestado" class="form-label">Estado do CRM</label>
                     <input type="text" name="crmestado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getEstadoCrm()%>" class="form-control">
+                           value="<%=medico.getEstadoCrm()%>" class="form-control">
                 </div>
+                <%if (tipoConta == Enums.TipoConta.Adm) {%>
                 <div class="mb-3">
                     <label for="autorizado" class="form-label">Autorizado?</label>
                     <input type="text" name="autorizado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
-                        value="<%=medico.getAutorizado()%>" class="form-control">
+                           value="<%=medico.getAutorizado()%>" class="form-control">
                 </div>
+                <%} else { %>
+                <input type="hidden" name="autorizado" value="<%=medico.getAutorizado()%>" class="form-control">
+                <%}%>
                 <select class="form-select d-block w-100 form-control" id="idespecialidade" name="idespecialidade" required>
                     <option value="">Escolha a Especialidade do M�dico.</option>
                     <%
@@ -82,7 +88,7 @@
                                 out.println(especialidade.getDescricao());
                                 out.println("</option>");
                             }
-                            %>
+                    %>
                 </select>
                 <div class="btn-submit-container">
                     <input type="submit" name="btEnviar" value="<%=acao%>" class="btn btn-primary">

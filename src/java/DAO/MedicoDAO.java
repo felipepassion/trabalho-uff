@@ -22,7 +22,7 @@ public class MedicoDAO {
             sql.setString(4, medico.getCrm());
             sql.setString(5, medico.getEstadoCrm());
             sql.setInt(6, medico.getIdEspecialidade());
-            sql.setString(6, medico.getAutorizado());
+            sql.setString(7, medico.getAutorizado());
             sql.executeUpdate();
 
         } catch (SQLException e) {
