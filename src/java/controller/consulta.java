@@ -185,7 +185,15 @@ public class consulta extends HttpServlet {
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        consultaDAO.Excluir(consulta);
+                         try {
+                            consultaDAO.Excluir(consulta);
+                        } catch (Exception ex) {
+                            if (ex.getMessage().contains("foreign key constraint fails")) {
+                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                rd = request.getRequestDispatcher("/views/login.jsp");
+                                rd.forward(request, response);
+                            }
+                        }
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }

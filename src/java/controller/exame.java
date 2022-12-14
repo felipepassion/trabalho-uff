@@ -154,7 +154,15 @@ public class exame extends HttpServlet {
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        exameDAO.Excluir(exame);
+                        try {
+                            exameDAO.Excluir(exame);
+                        } catch (Exception ex) {
+                            if (ex.getMessage().contains("foreign key constraint fails")) {
+                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                rd = request.getRequestDispatcher("/views/login.jsp");
+                                rd.forward(request, response);
+                            }
+                        }
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }

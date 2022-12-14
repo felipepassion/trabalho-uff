@@ -89,6 +89,20 @@ public class ConsultaDAO {
             conexao.closeConexao();
         }
     }
+    
+    public void ExcluirDoPaciente(int pacienteId) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM consulta WHERE IDPACIENTE = ? ");
+            sql.setInt(1, pacienteId);
+            sql.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de delete (excluir) incorreta - " + e.getMessage());
+        } finally {
+            conexao.closeConexao();
+        }
+    }
 
     /**
      *

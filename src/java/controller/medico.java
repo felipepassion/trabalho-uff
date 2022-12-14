@@ -13,7 +13,7 @@ import models.Medico;
 import javax.servlet.RequestDispatcher;
 import models.Especialidade;
 
-@WebServlet(name = "medico", urlPatterns = { "/medico" })
+@WebServlet(name = "medico", urlPatterns = {"/medico"})
 public class medico extends HttpServlet {
 
     @Override
@@ -80,7 +80,7 @@ public class medico extends HttpServlet {
         String crm = request.getParameter("crm");
         String crm_estado = request.getParameter("crmestado");
         String id_especialidade = request.getParameter("idespecialidade");
-        String autorizado  = request.getParameter("autorizado");
+        String autorizado = request.getParameter("autorizado");
 
         String btEnviar = request.getParameter("btEnviar");
 
@@ -131,7 +131,15 @@ public class medico extends HttpServlet {
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        medicoDAO.Excluir(medico);
+                        try {
+                            medicoDAO.Excluir(medico);
+                        } catch (Exception ex) {
+                            if (ex.getMessage().contains("foreign key constraint fails")) {
+                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                rd = request.getRequestDispatcher("/views/login.jsp");
+                                rd.forward(request, response);
+                            }
+                        }
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }

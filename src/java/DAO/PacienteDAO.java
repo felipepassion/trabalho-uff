@@ -86,7 +86,7 @@ public class PacienteDAO {
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir) incorreta");
+            throw new RuntimeException("Query de delete (excluir) incorreta " + e.getMessage());
         } finally {
             conexao.closeConexao();
         }

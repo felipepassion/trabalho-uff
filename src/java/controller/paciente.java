@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import models.TipoPlano;
 import models.Usuario;
 
-@WebServlet(name = "paciente", urlPatterns = { "/paciente" })
+@WebServlet(name = "paciente", urlPatterns = {"/paciente"})
 public class paciente extends HttpServlet {
 
     @Override
@@ -125,7 +125,7 @@ public class paciente extends HttpServlet {
                         pacienteDAO.Inserir(paciente);
                         HttpSession session = request.getSession();
                         Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
-                        if(usuarioLogado == null){
+                        if (usuarioLogado == null) {
                             Usuario usuarioObtido = pacienteDAO.Logar(new Paciente(cpf_user, senha_user));
                             session.setAttribute("usuario", usuarioObtido);
                             rd = request.getRequestDispatcher("/");
@@ -138,7 +138,16 @@ public class paciente extends HttpServlet {
                         request.setAttribute("msgOperacaoRealizada", "Alteração realizada com sucesso");
                         break;
                     case "Excluir":
-                        pacienteDAO.Excluir(paciente);
+                        try {
+                            pacienteDAO.Excluir(paciente);
+                        } catch (Exception ex) {
+                            if (ex.getMessage().contains("foreign key constraint fails")) {
+                                request.setAttribute("msgError", "Este paciente possui exames/consultas em seu nome.\n Exclua-as primeiro para poder eliminar o paciente.");
+                                rd = request.getRequestDispatcher("/views/login.jsp");
+                                rd.forward(request, response);
+                            }
+                        }
+
                         request.setAttribute("msgOperacaoRealizada", "Exclusão realizada com sucesso");
                         break;
                 }
