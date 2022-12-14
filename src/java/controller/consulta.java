@@ -46,15 +46,16 @@ public class consulta extends HttpServlet {
         ArrayList<Medico> listaDeMedicos = new ArrayList<Medico>();
 
         try {
+
             if (tipoConta == Enums.TipoConta.Paciente) {
                 listaDeMedicos = medicoDAO.ListaDeMedicos();
                 listaDePacientes.add(pacienteDAO.getPaciente(usuarioLogado.getId()));
-
             } else {
                 listaDePacientes = pacienteDAO.ListaDePacientes();
-                listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
-
                 if (tipoConta == Enums.TipoConta.Medico) {
+                    listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
+                } else {
+                    listaDeMedicos = medicoDAO.ListaDeMedicos();
                 }
             }
         } catch (Exception ex) {
@@ -80,7 +81,7 @@ public class consulta extends HttpServlet {
                     } else if (tipoConta == Enums.TipoConta.Medico) {
                         listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
                     } else {
-                        if (selectedMedico != null && selectedMedico != "" && selectedMedico != "0" ) {
+                        if (selectedMedico != null && selectedMedico != "" && selectedMedico != "0") {
                             listaConsultas = consultaDAO.ListaDeConsultasMedico(Integer.parseInt(selectedMedico));
                         } else {
                             listaConsultas = consultaDAO.ListaDeConsultas();
