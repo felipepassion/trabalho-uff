@@ -47,7 +47,7 @@ public class usuario extends HttpServlet {
                     usuario.setId(id);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de usuario");
+                    throw new RuntimeException("Falha em uma query para cadastro de usuario" + ex.getMessage());
                 }
                 break;
 
@@ -101,7 +101,7 @@ public class usuario extends HttpServlet {
 
         } else {
 
-            Usuario usuario = new Usuario(nome_user, cpf_user, senha_user);
+            Usuario usuario = new Usuario(nome_user, cpf_user, senha_user, null);
             usuario.setId(id);
 
             UsuarioDAO usuarioDAO = new UsuarioDAO();

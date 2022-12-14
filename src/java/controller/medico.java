@@ -36,12 +36,12 @@ public class medico extends HttpServlet {
                     request.setAttribute("listaMedicos", listaMedicos);
                     rd = request.getRequestDispatcher("/views/listaMedicos.jsp");
                     rd.forward(request, response);
+                    return;
 
                 } catch (IOException | ServletException ex) {
                     System.out.println(ex.getMessage());
                     throw new RuntimeException("Falha na query listar medicos (Medico) - " + ex.getMessage());
                 }
-                break;
             case "Alterar":
             case "Excluir":
                 try {
@@ -51,7 +51,7 @@ public class medico extends HttpServlet {
 
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
-                    throw new RuntimeException("Falha em uma query para cadastro de medico");
+                    throw new RuntimeException("Falha em uma query para cadastro de medico" + ex.getMessage());
                 }
                 break;
 

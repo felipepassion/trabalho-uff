@@ -14,19 +14,20 @@ public class MedicoDAO {
         try {
             PreparedStatement sql = conexao.getConexao()
                     .prepareStatement(
-                            "INSERT INTO medico (nome, cpf, senha, crm, autorizado, crmestado, idespecialidade, autorizado)"
+                            "INSERT INTO medico (nome, cpf, senha, crm, autorizado, estadocrm, idespecialidade)"
                             + " VALUES (?,?,?,?,?,?,?)");
             sql.setString(1, medico.getNome());
             sql.setString(2, medico.getCpf());
             sql.setString(3, medico.getSenha());
             sql.setString(4, medico.getCrm());
-            sql.setString(5, medico.getEstadoCrm());
-            sql.setInt(6, medico.getIdEspecialidade());
-            sql.setString(7, medico.getAutorizado());
+            sql.setString(5, medico.getAutorizado());
+            sql.setString(6, medico.getEstadoCrm());
+            sql.setInt(7, medico.getIdEspecialidade());
+            
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage());
         } finally {
             conexao.closeConexao();
         }

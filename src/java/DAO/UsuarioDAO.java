@@ -15,11 +15,11 @@ public class UsuarioDAO {
                     + " VALUES (?,?,?)");
             sql.setString(1, usuario.getNome());
             sql.setString(2, usuario.getCpf());
-            sql.setString(4, usuario.getSenha());
+            sql.setString(3, usuario.getSenha());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage());
         } finally {
             conexao.closeConexao();
         }
