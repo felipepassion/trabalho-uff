@@ -27,6 +27,7 @@ public class consulta extends HttpServlet {
             throws ServletException, IOException {
 
         String acao = (String) request.getParameter("acao");
+
         if (acao == null || acao == "") {
             acao = "Listar";
         }
@@ -51,17 +52,23 @@ public class consulta extends HttpServlet {
 
             } else {
                 listaDePacientes = pacienteDAO.ListaDePacientes();
+                listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
+
                 if (tipoConta == Enums.TipoConta.Medico) {
-                    listaDeMedicos.add(medicoDAO.getMedico(usuarioLogado.getId()));
                 }
             }
         } catch (Exception ex) {
             Logger.getLogger(consulta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        String selectedMedico = (String) request.getParameter("idMedico");
+        if (selectedMedico == null) {
+            selectedMedico = "0";
+        }
+        request.setAttribute("selectedMedico", selectedMedico);
         request.setAttribute("listaDeMedicos", listaDeMedicos);
         request.setAttribute("listaDePacientes", listaDePacientes);
-        
+
         switch (acao) {
             case "Listar":
                 try {
@@ -73,7 +80,11 @@ public class consulta extends HttpServlet {
                     } else if (tipoConta == Enums.TipoConta.Medico) {
                         listaConsultas = consultaDAO.ListaDeConsultasMedico(usuarioLogado.getId());
                     } else {
-                        listaConsultas = consultaDAO.ListaDeConsultas();
+                        if (selectedMedico != null && selectedMedico != "" && selectedMedico != "0" ) {
+                            listaConsultas = consultaDAO.ListaDeConsultasMedico(Integer.parseInt(selectedMedico));
+                        } else {
+                            listaConsultas = consultaDAO.ListaDeConsultas();
+                        }
                     }
 
                     request.setAttribute("msgOperacaoRealizada", "");

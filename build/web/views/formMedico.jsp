@@ -64,6 +64,11 @@
                     <input type="text" name="crmestado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
                         value="<%=medico.getEstadoCrm()%>" class="form-control">
                 </div>
+                <div class="mb-3">
+                    <label for="autorizado" class="form-label">Autorizado?</label>
+                    <input type="text" name="autorizado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
+                        value="<%=medico.getAutorizado()%>" class="form-control">
+                </div>
                 <select class="form-select d-block w-100 form-control" id="idespecialidade" name="idespecialidade" required>
                     <option value="">Escolha a Especialidade do M�dico.</option>
                     <%

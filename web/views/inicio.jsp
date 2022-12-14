@@ -60,8 +60,9 @@
             </div>
         </article>
         <% } %>
-
+        
         <%if (tipoConta == Enums.TipoConta.Medico || tipoConta == Enums.TipoConta.Paciente) {%>
+        
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
@@ -70,6 +71,7 @@
                 </span>
             </div>
         </article>
+        
         <article class="content px-4">
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-book me-2" aria-hidden="true"></span>
@@ -106,6 +108,15 @@
             <div class="alert alert-secondary mt-4">
                 <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
+                    <a href="paciente">Pacientes</a>
+                </span>
+            </div>
+        </article>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
                     <a href="medico">Médicos</a>
                 </span>
             </div>
@@ -134,6 +145,15 @@
                 <span class="oi oi-people me-2" aria-hidden="true"></span>
                 <span class="text-nowrap">
                     <a href="usuario">Administradores</a>
+                </span>
+            </div>
+        </article>
+        
+        <article class="content px-4">
+            <div class="alert alert-secondary mt-4">
+                <span class="oi oi-medical-cross me-2" aria-hidden="true"></span>
+                <span class="text-nowrap">
+                    <a href="consulta">Consultas realizadas</a>
                 </span>
             </div>
         </article>

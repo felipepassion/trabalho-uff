@@ -13,8 +13,8 @@ public class PacienteDAO {
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao()
-                    .prepareStatement("INSERT INTO paciente (nome, cpf, senha, idtipoplano)"
-                            + " VALUES (?,?,?,?)");
+                    .prepareStatement("INSERT INTO paciente (nome, cpf, senha, idtipoplano, autorizado)"
+                            + " VALUES (?,?,?,?,?)");
             sql.setString(1, paciente.getNome());
             sql.setString(2, paciente.getCpf());
             sql.setString(3, paciente.getSenha());
@@ -43,6 +43,7 @@ public class PacienteDAO {
                     paciente.setCpf(resultado.getString("CPF"));
                     paciente.setSenha(resultado.getString("SENHA"));
                     paciente.setIdTipoPlano(resultado.getInt("IDTIPOPLANO"));
+                    paciente.setAutorizado(resultado.getString("AUTORIZADO"));
 
                 }
             }
@@ -59,12 +60,13 @@ public class PacienteDAO {
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao()
-                    .prepareStatement("UPDATE paciente SET nome = ?, cpf = ?, senha = ?, idtipoplano = ?  WHERE ID = ? ");
+                    .prepareStatement("UPDATE paciente SET nome = ?, cpf = ?, senha = ?, idtipoplano = ?, autorizado = ?  WHERE ID = ? ");
             sql.setString(1, Paciente.getNome());
             sql.setString(2, Paciente.getCpf());
             sql.setString(3, Paciente.getSenha());
             sql.setInt(4, Paciente.getIdTipoPlano());
-            sql.setInt(5, Paciente.getId());
+            sql.setString(5, Paciente.getAutorizado());
+            sql.setInt(6, Paciente.getId());
 
             sql.executeUpdate();
 
@@ -102,7 +104,8 @@ public class PacienteDAO {
                     Paciente paciente = new Paciente(resultado.getString("NOME"),
                             resultado.getString("CPF"),
                             resultado.getString("SENHA"),
-                            resultado.getInt("IDTIPOPLANO"));
+                            resultado.getInt("IDTIPOPLANO"),
+                            resultado.getString("AUTORIZADO"));
                     paciente.setId(Integer.parseInt(resultado.getString("id")));
                     meusPacientes.add(paciente);
                 }
@@ -115,7 +118,7 @@ public class PacienteDAO {
         return meusPacientes;
     }
 
-    public Usuario Logar(Paciente paciente) throws SQLException {
+    public Usuario Logar(Paciente paciente) throws SQLException, Exception {
         Conexao conexao = new Conexao();
 
         PreparedStatement sql = conexao.getConexao()
@@ -131,7 +134,12 @@ public class PacienteDAO {
                 pacienteObtido.setNome(resultado.getString("NOME"));
                 pacienteObtido.setCpf(resultado.getString("CPF"));
                 pacienteObtido.setSenha(resultado.getString("SENHA"));
+                pacienteObtido.setAutorizado(resultado.getString("AUTORIZADO"));
             }
+        }
+        String test = pacienteObtido.getAutorizado();
+        if (test == "n" || test == "N") {
+            throw new Exception("unauthorized");
         }
         return pacienteObtido;
 

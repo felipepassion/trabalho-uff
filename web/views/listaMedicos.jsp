@@ -37,6 +37,7 @@
                                 <th scope="col">Id</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">CPF</th>
+                                <th scope="col">AUTORIZADO</th>
                                 <th scope="col">Açoes</th>
                             </tr>
                         </thead>
@@ -48,7 +49,8 @@
                                     out.println("<tr>");
                                     out.println("<th>" + medico.getId() + "</th>");
                                     out.println("<td>" + medico.getNome() + "</td>");
-                                    out.println("<td>" + medico.getCpf() + "</td>");%>
+                                    out.println("<td>" + medico.getCpf() + "</td>");
+                                    out.println("<td>" + medico.getAutorizado() + "</td>");%>
                         <td><a href="medico?acao=Alterar&id=<%=medico.getId()%>" class="btn btn-warning">Alterar</a>
                             <a href="medico?acao=Excluir&id=<%=medico.getId()%>" class="btn btn-danger">Excluir</a></td>
                             <%   out.println("</tr>");

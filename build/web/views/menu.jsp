@@ -48,7 +48,7 @@
                     </a>
                 </div>
                 <div class="nav-item px-3">
-                    <a class="nav-link active" href="paciente" Match="NavLinkMatch.All">
+                    <a class="nav-link active" href="login" Match="NavLinkMatch.All">
                         <span class="oi oi-person" aria-hidden="true"></span> Login de Administradores
                     </a>
                 </div>
@@ -60,6 +60,11 @@
                 <div class="nav-item px-3">
                     <a class="nav-link" href="medico" Match="NavLinkMatch.All">
                         <span class="oi oi-person" aria-hidden="true"></span> Médicos
+                    </a>
+                </div>
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="paciente" Match="NavLinkMatch.All">
+                        <span class="oi oi-person" aria-hidden="true"></span> Pacientes
                     </a>
                 </div>
                 <div class="nav-item px-3">
@@ -86,12 +91,14 @@
                 </div>
                 <% } %>
 
-                <%if (tipoConta == Enums.TipoConta.Paciente || tipoConta == Enums.TipoConta.Medico) {%>
                 <div class="nav-item px-3">
                     <a class="nav-link" href="consulta" Match="NavLinkMatch.All">
                         <span class="oi oi-medical-cross" aria-hidden="true"></span> Consultas realizadas
                     </a>
-                </div> 
+                </div>
+                
+                <%if (tipoConta == Enums.TipoConta.Paciente || tipoConta == Enums.TipoConta.Medico) {%>
+                 
                 <div class="nav-item px-3">
                     <a class="nav-link" href="consulta?acao=Incluir" Match="NavLinkMatch.All">
                         <span class="oi oi-medical-cross" aria-hidden="true"></span> Marcar Consulta

@@ -84,15 +84,24 @@ public class login extends HttpServlet {
 
             try {
                 usuarioObtido = pacienteDAO.Logar(paciente);
+                if (usuarioObtido.getAutorizado().toUpperCase().equals("N")) {
+                    request.setAttribute("msgError", "Usuário NÃO AUTORIZADO");
+                    rd = request.getRequestDispatcher("/views/login.jsp");
+                    rd.forward(request, response);
+                }
                 if (usuarioObtido.getId() == 0) {
                     Medico medicoObtido;
                     Medico medico = new Medico(cpf_user, senha_user);
                     MedicoDAO medicoDAO = new MedicoDAO();
                     usuarioObtido = medicoDAO.Logar(medico);
-
+                    if (usuarioObtido.getAutorizado().equals("N")) {
+                        request.setAttribute("msgError", "Usuário NÃO AUTORIZADO");
+                        rd = request.getRequestDispatcher("/views/login.jsp");
+                        rd.forward(request, response);
+                    }
                     try {
                         if (usuarioObtido.getId() == 0) {
-                            Usuario usuario = new Usuario(cpf_user, senha_user);
+                            Usuario usuario = new Usuario(cpf_user, senha_user, "S");
                             usuarioObtido = usuarioDAO.Logar(usuario);
                             if (usuarioObtido.getId() != 0) {
                                 session.setAttribute("tipoUsuario", Enums.TipoConta.Adm);
@@ -107,8 +116,15 @@ public class login extends HttpServlet {
                     session.setAttribute("tipoUsuario", Enums.TipoConta.Paciente);
                 }
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-                throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
+                if (ex.getMessage() == "unauthorized") {
+                    request.setAttribute("msgError", "Usuário NÃO AUTORIZADO");
+                    rd = request.getRequestDispatcher("/views/login.jsp");
+                    rd.forward(request, response);
+                } else {
+                    System.out.println(ex.getMessage());
+                    throw new RuntimeException("Falha na query para Logar - " + ex.getMessage());
+                }
+
             }
 
             if (usuarioObtido.getId() != 0) {

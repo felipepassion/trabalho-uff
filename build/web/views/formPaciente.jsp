@@ -54,6 +54,11 @@
                     <input type="text" name="senha" <%= acao.equals("Excluir") ? "Readonly" : ""%>
                         value="<%=paciente.getSenha()%>" class="form-control">
                 </div>
+                <div class="mb-3">
+                    <label for="autorizado" class="form-label">Autorizado?</label>
+                    <input type="text" name="autorizado" <%= acao.equals("Excluir") ? "Readonly" : ""%>
+                        value="<%=paciente.getAutorizado()%>" class="form-control">
+                </div>
                 <select class="form-select d-block w-100 form-control" id="idtipoplano" name="idtipoplano" required>
                     <option value="">Escolha o plano.</option>
                     <%

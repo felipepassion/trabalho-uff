@@ -80,12 +80,13 @@ public class paciente extends HttpServlet {
         String cpf_user = request.getParameter("cpf");
         String senha_user = request.getParameter("senha");
         String id_tipo_plano = request.getParameter("idtipoplano");
+        String autorizado = request.getParameter("autorizado");
 
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;
 
-        if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty() || senha_user.isEmpty()
+        if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty() || senha_user.isEmpty() || autorizado.isEmpty()
                 || id_tipo_plano.isEmpty()) {
 
             Paciente paciente = new Paciente();
@@ -113,7 +114,7 @@ public class paciente extends HttpServlet {
 
         } else {
 
-            Paciente paciente = new Paciente(nome_user, cpf_user, senha_user, Integer.parseInt(id_tipo_plano));
+            Paciente paciente = new Paciente(nome_user, cpf_user, senha_user, Integer.parseInt(id_tipo_plano), autorizado);
             paciente.setId(id);
 
             PacienteDAO pacienteDAO = new PacienteDAO();

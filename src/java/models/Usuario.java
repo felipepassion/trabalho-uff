@@ -12,16 +12,19 @@ public class Usuario {
     private String nome;
     private String cpf;
     private String senha;
+    private String autorizado;
 
-    public Usuario(String nome, String cpf, String senha) {
+    public Usuario(String nome, String cpf, String senha, String autorizado) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
+        this.autorizado = autorizado;
     }
 
-    public Usuario(String cpf, String senha) {
+    public Usuario(String cpf, String senha, String autorizado) {
         this.cpf = cpf;
         this.senha = senha;
+        this.autorizado = autorizado;
     }
 
     public Usuario() {
@@ -29,6 +32,7 @@ public class Usuario {
         this.nome = "";
         this.cpf = "";
         this.senha = "";
+        this.autorizado = "S";
     }
 
     public int getId() {
@@ -42,7 +46,14 @@ public class Usuario {
     public String getNome() {
         return nome;
     }
+    
+    public String getAutorizado() {
+        return autorizado;
+    }
 
+    public void setAutorizado(String autorizado) {
+        this.autorizado = autorizado;
+    }
     public void setNome(String nome) {
         this.nome = nome;
     }

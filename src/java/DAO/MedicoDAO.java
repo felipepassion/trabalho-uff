@@ -14,14 +14,15 @@ public class MedicoDAO {
         try {
             PreparedStatement sql = conexao.getConexao()
                     .prepareStatement(
-                            "INSERT INTO medico (nome, cpf, senha, crm, crmestado, idespecialidade)"
-                                    + " VALUES (?,?,?,?,?,?)");
+                            "INSERT INTO medico (nome, cpf, senha, crm, autorizado, crmestado, idespecialidade, autorizado)"
+                            + " VALUES (?,?,?,?,?,?,?)");
             sql.setString(1, medico.getNome());
             sql.setString(2, medico.getCpf());
             sql.setString(3, medico.getSenha());
             sql.setString(4, medico.getCrm());
             sql.setString(5, medico.getEstadoCrm());
             sql.setInt(6, medico.getIdEspecialidade());
+            sql.setString(6, medico.getAutorizado());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -47,6 +48,7 @@ public class MedicoDAO {
                     medico.setCrm(resultado.getString("CRM"));
                     medico.setEstadoCrm(resultado.getString("ESTADOCRM"));
                     medico.setIdEspecialidade(resultado.getInt("IDESPECIALIDADE"));
+                    medico.setAutorizado(resultado.getString("AUTORIZADO"));
                 }
             }
             return medico;
@@ -63,14 +65,16 @@ public class MedicoDAO {
         try {
             PreparedStatement sql = conexao.getConexao()
                     .prepareStatement(
-                            "UPDATE medico SET nome = ?, cpf = ?, senha = ?, crm = ?, estadocrm = ?, idespecialidade = ? WHERE ID = ? ");
+                            "UPDATE medico SET nome = ?, cpf = ?, senha = ?, crm = ?, estadocrm = ?, idespecialidade = ?, autorizado = ? WHERE ID = ? ");
             sql.setString(1, Medico.getNome());
             sql.setString(2, Medico.getCpf());
             sql.setString(3, Medico.getSenha());
             sql.setString(4, Medico.getCrm());
             sql.setString(5, Medico.getEstadoCrm());
             sql.setInt(6, Medico.getIdEspecialidade());
-            sql.setInt(7, Medico.getId());
+            sql.setString(7, Medico.getAutorizado());
+            sql.setInt(8, Medico.getId());
+
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -110,8 +114,9 @@ public class MedicoDAO {
                             resultado.getString("SENHA"),
                             resultado.getString("CRM"),
                             resultado.getString("ESTADOCRM"),
-                            resultado.getInt("IDESPECIALIDADE")
-                            );
+                            resultado.getInt("IDESPECIALIDADE"),
+                            resultado.getString("AUTORIZADO")
+                    );
                     medico.setId(Integer.parseInt(resultado.getString("id")));
                     meusMedicos.add(medico);
                 }
@@ -124,7 +129,7 @@ public class MedicoDAO {
         return meusMedicos;
     }
 
-    public Usuario Logar(Medico medico) throws SQLException {
+    public Usuario Logar(Medico medico) throws SQLException, Exception {
         Conexao conexao = new Conexao();
 
         PreparedStatement sql = conexao.getConexao()
@@ -140,7 +145,11 @@ public class MedicoDAO {
                 medicoObtido.setNome(resultado.getString("NOME"));
                 medicoObtido.setCpf(resultado.getString("CPF"));
                 medicoObtido.setSenha(resultado.getString("SENHA"));
+                medicoObtido.setAutorizado(resultado.getString("AUTORIZADO"));
             }
+        }
+        if (medicoObtido.getAutorizado().toLowerCase() == "n") {
+            throw new Exception("unauthorized");
         }
         return medicoObtido;
 

@@ -21,8 +21,8 @@ public class Paciente extends Usuario {
     public Paciente() {
         super();
     }
-    public Paciente(String nome, String cpf, String senha, int idTipoPlano){
-        super(nome, cpf, senha);
+    public Paciente(String nome, String cpf, String senha, int idTipoPlano, String autorizado){
+        super(nome, cpf, senha, autorizado);
         this.idTipoPlano = idTipoPlano;
     }
 

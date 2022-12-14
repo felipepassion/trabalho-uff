@@ -105,7 +105,7 @@ public class UsuarioDAO {
         return meusUsuarios;
     }
 
-    public Usuario Logar(Usuario usuario) throws SQLException  {
+    public Usuario Logar(Usuario usuario) throws SQLException, Exception  {
         Conexao conexao = new Conexao();
        
             PreparedStatement sql = conexao.getConexao().prepareStatement("SELECT * FROM administrador WHERE cpf=? and senha =? LIMIT 1");

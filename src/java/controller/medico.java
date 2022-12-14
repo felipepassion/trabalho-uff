@@ -80,13 +80,14 @@ public class medico extends HttpServlet {
         String crm = request.getParameter("crm");
         String crm_estado = request.getParameter("crmestado");
         String id_especialidade = request.getParameter("idespecialidade");
+        String autorizado  = request.getParameter("autorizado");
 
         String btEnviar = request.getParameter("btEnviar");
 
         RequestDispatcher rd;
 
         if (nome_user.isEmpty() || cpf_user.isEmpty() || senha_user.isEmpty() || senha_user.isEmpty()
-                || id_especialidade.isEmpty() || crm.isEmpty() || crm_estado.isEmpty()) {
+                || id_especialidade.isEmpty() || crm.isEmpty() || crm_estado.isEmpty() || autorizado.isEmpty()) {
 
             Medico medico = new Medico();
             switch (btEnviar) {
@@ -114,7 +115,7 @@ public class medico extends HttpServlet {
         } else {
 
             Medico medico = new Medico(nome_user, cpf_user, senha_user, crm, crm_estado,
-                    Integer.parseInt(id_especialidade));
+                    Integer.parseInt(id_especialidade), autorizado);
             medico.setId(id);
 
             MedicoDAO medicoDAO = new MedicoDAO();
